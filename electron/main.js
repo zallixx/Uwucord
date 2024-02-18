@@ -11,6 +11,8 @@ function createWindow() {
   })
 
   win.loadURL('http://localhost:3000')
+
+  win.removeMenu()
 }
 
 app.whenReady().then(createWindow)
