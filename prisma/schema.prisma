@@ -24,6 +24,12 @@ model Profile {
 
   chats Chat[] @relation("ChatParticipants")
 
+  friendOf1    Friendship[] @relation("User1")
+  friendOf2    Friendship[] @relation("User2")
+
+  receivedFriendshipRequests FriendshipRequest[] @relation("FriendshipRequestsReceived")
+  sentFriendshipRequests     FriendshipRequest[] @relation("FriendshipRequestsSent")
+
   sentMessages Message[] @relation("Sender")
 
   createdAt DateTime @default(now())
@@ -114,4 +120,32 @@ model Message {
 
   createdAt  DateTime  @default(now())
   updatedAt  DateTime  @updatedAt
+}
+
+model FriendshipRequest {
+  id            String   @id @default(uuid())
+  sender        Profile  @relation("FriendshipRequestsSent", fields: [senderId], references: [id])
+
+  senderId      String
+
+  recipient     Profile  @relation("FriendshipRequestsReceived", fields: [recipientId], references: [id])
+  recipientId   String
+
+  status        String   // "pending", "accepted", "rejected"
+
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Friendship {
+  id          String    @id @default(uuid())
+
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  user1       Profile   @relation("User1", fields: [userId1], references: [id])
+  userId1     String
+
+  user2       Profile   @relation("User2", fields: [userId2], references: [id])
+  userId2     String
 }
