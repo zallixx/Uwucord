@@ -22,6 +22,10 @@ model Profile {
   members  Member[]
   channels Channel[]
 
+  chats Chat[] @relation("ChatParticipants")
+
+  sentMessages Message[] @relation("Sender")
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -85,4 +89,29 @@ model Channel {
 
   @@index([profileId])
   @@index([serverId])
+}
+
+model Chat {
+  id          String   @id @default(uuid())
+  name        String?
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  participants Profile[] @relation("ChatParticipants")
+  messages    Message[]
+}
+
+model Message {
+  id         String    @id @default(uuid())
+  content    String
+
+  sender     Profile   @relation("Sender", fields: [senderId], references: [userId])
+  senderId   String
+
+  chat       Chat      @relation(fields: [chatId], references: [id])
+  chatId     String
+
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
 }
