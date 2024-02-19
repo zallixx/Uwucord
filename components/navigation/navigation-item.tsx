@@ -31,9 +31,9 @@ export const NavigationItem = ({id, imageUrl, name}: NavigationItemProps) => {
                 className='group relative flex items-center'
             >
                 <div className={cn(
-                    "absolute left-0 bg-primary rounded-r-full transition-all w-[4px]",
-                    params?.serverId !== id && "group-hover:h-[20px]",
-                    params?.serverId === id ? "h-[36px]" : "h-[8px]"
+                    "absolute left-0 bg-primary rounded-r-full transition-all w-[0px]",
+                    params?.serverId !== id && "group-hover:h-[20px] group-hover:w-[4px]",
+                    params?.serverId === id ? "h-[36px] w-[4px]" : "h-[8px] group-hover:w-[4px]"
                 )}/>
                 <div
                     className={cn(
