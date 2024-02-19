@@ -55,14 +55,14 @@ export const InviteModal = () => {
             <DialogContent className="bg-white text-black p-0 overflow-hidden">
                 <DialogHeader className="pt-8 px-6">
                     <DialogTitle className="text-2xl text-center font-bold">
-                        Invite Friends
+                        Пригласи друзей
                     </DialogTitle>
                 </DialogHeader>
                 <div className="p-6">
                     <Label
                         className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70"
                     >
-                        Server invite link
+                        Ссылка-приглашение на сервер
                     </Label>
                     <div className="flex items-center mt-2 gap-x-2">
                         <Input
@@ -84,7 +84,7 @@ export const InviteModal = () => {
                         size="sm"
                         className="text-xs text-zinc-500 mt-4"
                     >
-                        Generate a new link
+                        Сгенерировать новую ссылку
                         <RefreshCw className="w-4 h-4 ml-2"/>
                     </Button>
                 </div>
