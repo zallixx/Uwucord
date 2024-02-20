@@ -3,9 +3,10 @@
 import {ScrollArea} from "@/components/ui/scroll-area";
 import {Separator} from "@/components/ui/separator";
 import {Button} from "@/components/ui/button";
-import {Users} from "lucide-react";
+import {Plus, Users} from "lucide-react";
 import {Input} from "@/components/ui/input";
 import {useState} from "react";
+import {ActionTooltip} from "@/components/action-tooltip";
 
 const ChatsIdPage = () => {
     const [type_of_top_section, setType_of_top_section] = useState("friends");
@@ -23,6 +24,14 @@ const ChatsIdPage = () => {
                             <Users className="absolute left-4" strokeWidth={2}/>
                             <span className="pr-16">Друзья</span>
                         </button>
+                        <p className="mx-6 mt-[12px] flex flex-row text-[#949ba4] text-xs hover:text-[#dbdee1]">
+                            ЛИЧНЫЕ СООБЩЕНИЯ
+                            <ActionTooltip side="top" align="center" label="Создать ЛС">
+                                <button className="group flex items-center absolute right-4">
+                                    <Plus className="text-[#949ba4]" size={14}/>
+                                </button>
+                            </ActionTooltip>
+                        </p>
                     </ScrollArea>
                 </div>
                 <div className="flex-1 flex flex-col">
