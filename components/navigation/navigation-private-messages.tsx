@@ -10,7 +10,7 @@ export const NavigationPrivateMessages = () => {
     const router = useRouter();
 
     const onClick = () => {
-        router.push(`/chats/0}`)
+        router.push(`/chats/main}`)
     }
 
     return (
