@@ -24,7 +24,7 @@ const ChatsIdPage = () => {
                             <Users className="absolute left-4" strokeWidth={2}/>
                             <span className="pr-16">Друзья</span>
                         </button>
-                        <p className="mx-6 mt-[12px] flex flex-row text-[#949ba4] text-xs hover:text-[#dbdee1]">
+                        <p className="mx-6 mt-[12px] flex flex-row text-[#949ba4] text-xs font-bold hover:text-[#dbdee1]">
                             ЛИЧНЫЕ СООБЩЕНИЯ
                             <ActionTooltip side="top" align="center" label="Создать ЛС">
                                 <button className="group flex items-center absolute right-4">
