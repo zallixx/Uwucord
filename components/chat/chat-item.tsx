@@ -5,7 +5,7 @@ interface NavigationItemProps {
     name: string;
 }
 
-export const NavigationItem = ({id,  name}: NavigationItemProps) => {
+export const ChatItem = ({id, name}: NavigationItemProps) => {
     const router = useRouter();
     const onClick = () => {
         router.push(`/chats/${id}`)
