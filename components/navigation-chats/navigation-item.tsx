@@ -12,7 +12,7 @@ export const NavigationItem = ({id,  name}: NavigationItemProps) => {
     }
 
     return (
-        <button onClick={onClick} className="mx-2 mt-[8px] h-[42px] w-[224px] text-[#949ba4] rounded-md bg-transparent text-sm relative hover:bg-[#36373d] hover:text-[#dbdee1]">
+        <button onClick={onClick} className="mx-2 h-[42px] w-[224px] text-[#949ba4] rounded-md bg-transparent text-sm relative hover:bg-[#36373d] hover:text-[#dbdee1]">
             {name}
         </button>
     )

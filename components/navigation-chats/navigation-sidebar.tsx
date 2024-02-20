@@ -21,7 +21,7 @@ export const NavigationSidebar = () => {
     return (
         <div className="">
             {chats.map((chat) => (
-                <div key={chat.id} className="mb-4">
+                <div key={chat.id} className="">
                     <NavigationItem
                         id={chat.id}
                         name={chat.name}
