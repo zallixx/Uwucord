@@ -16,12 +16,12 @@ const ChatsIdPage = () => {
                 </div>
                 <div className="flex-1 flex flex-col">
                     <div className="h-12">
-                        <div className="my-2">
+                        <div className="my-2 font-bold text-sm">
                             <p className="flex flex-row mx-1 text-[#f2f3f5]">
                                 <UsersRound color="#80848e" className="mx-2"/>
                                 Друзья
+                                <Separator orientation="vertical" decorative className="ml-4 h-[24px] bg-[#3f4147]"/>
                             </p>
-                            <Separator orientation="vertical" decorative/>
                         </div>
                     </div>
                     <div className="flex-1">3</div>
