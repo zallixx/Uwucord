@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from 'react';
 import axios from 'axios';
 import {ChatItem} from '@/components/chat/chat-item';
 import {db} from "@/lib/db";
@@ -11,6 +11,7 @@ export const ChatSidebar = async () => {
     if (!profile) {
         return redirect("/")
     }
+    /*
     const chats = await db.chat.findMany({
         where: {
             participants: {
@@ -36,4 +37,5 @@ export const ChatSidebar = async () => {
             ))}
         </div>
     );
+    */
 };
