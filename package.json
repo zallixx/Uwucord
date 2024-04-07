@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "electron": "electron electron/main.js",
-    "package": "electron-builder"
+    "package": "electron-builder",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@clerk/nextjs": "^4.29.7",

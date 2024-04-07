@@ -71,7 +71,7 @@ export const ServerSearch = ({
                 </kbd>
             </button>
             <CommandDialog open={open} onOpenChange={setOpen}>
-                <CommandInput placeholder="Search all channels and members"/>
+                <CommandInput placeholder="Поиск каналов и участников"/>
                 <CommandList>
                     <CommandEmpty>
                         Ничего не найдено

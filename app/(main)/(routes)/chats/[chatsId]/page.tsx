@@ -5,7 +5,6 @@ import {Separator} from "@/components/ui/separator";
 import {Plus, Users} from "lucide-react";
 import {useState} from "react";
 import {ActionTooltip} from "@/components/action-tooltip";
-import {ChatSidebar} from "@/components/chat/chat-sidebar";
 
 const ChatsIdPage = () => {
     const [type_of_top_section, setType_of_top_section] = useState("friends");

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {useEffect, useState} from "react";
 
 type ChatScrollProps = {
     chatRef: React.RefObject<HTMLDivElement>;
@@ -19,9 +19,12 @@ export const useChatScroll = ({
 
     useEffect(() => {
         const topDiv = chatRef?.current;
+        console.log(topDiv?.scrollTop)
 
         const handleScroll = () => {
             const scrollTop = topDiv?.scrollTop;
+
+            console.log('TOP')
 
             if (scrollTop === 0 && shouldLoadMore) {
                 loadMore()
@@ -30,8 +33,9 @@ export const useChatScroll = ({
 
         topDiv?.addEventListener("scroll", handleScroll);
 
+
         return () => {
-            topDiv?.removeEventListener("scroll", handleScroll);
+
         }
     }, [shouldLoadMore, loadMore, chatRef]);
 
