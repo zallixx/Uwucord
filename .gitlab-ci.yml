@@ -24,8 +24,8 @@ deploy_production:
   - vercel pull --yes --environment=production --token=$VERCEL_TOKEN
   - vercel deploy --prod --token=$VERCEL_TOKEN --force
 stages:
-- test
+- deploy
 sast:
-  stage: test
+  stage: deploy
 include:
 - template: Security/SAST.gitlab-ci.yml
