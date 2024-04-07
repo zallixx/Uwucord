@@ -1,5 +1,5 @@
 ## Запуск:
 ```bash
-npm run tauri dev
+npm i
+npm run dev
 ```
-
