@@ -6,6 +6,7 @@ import {Plus, Users} from "lucide-react";
 import {useState} from "react";
 import {ActionTooltip} from "@/components/action-tooltip";
 import {ChatSidebar} from "@/components/chat/chat-sidebar";
+import {dmsearch} from "@/components/dm/dm-search";
 
 const ChatsIdPage = () => {
     const [type_of_top_section, setType_of_top_section] = useState("friends");
@@ -14,9 +15,7 @@ const ChatsIdPage = () => {
         <>
             <div className="flex h-screen">
                 <div className="w-60 bg-[#2b2d31]">
-                    <button className="h-[28px] mx-4 my-2 px-4 text-[#949ba4] rounded-md bg-[#1e1f22] text-sm">
-                        Найти или начать беседу
-                    </button>
+                    <DmSearch/>
                     <Separator/>
                     <ScrollArea>
                         <button className="mx-2 mt-[8px] h-[42px] w-[224px] text-[#949ba4] rounded-md bg-transparent text-sm relative hover:bg-[#36373d] hover:text-[#dbdee1]" onClick={() => setType_of_top_section("friends")}>
@@ -54,4 +53,4 @@ const ChatsIdPage = () => {
     );
 }
 
-export default ChatsIdPage;
+export default DmSearch;
