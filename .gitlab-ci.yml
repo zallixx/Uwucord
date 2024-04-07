@@ -1,5 +1,5 @@
 default:
-  image: node:16.16.0
+  image: node:18.18.2
 
 deploy_preview:
   stage: deploy
