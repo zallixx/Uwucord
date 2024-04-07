@@ -1,20 +1,31 @@
+# You can override the included template(s) by including variable overrides
+# SAST customization: https://docs.gitlab.com/ee/user/application_security/sast/#customizing-the-sast-settings
+# Secret Detection customization: https://docs.gitlab.com/ee/user/application_security/secret_detection/#customizing-settings
+# Dependency Scanning customization: https://docs.gitlab.com/ee/user/application_security/dependency_scanning/#customizing-the-dependency-scanning-settings
+# Container Scanning customization: https://docs.gitlab.com/ee/user/application_security/container_scanning/#customizing-the-container-scanning-settings
+# Note that environment variables can be set in several places
+# See https://docs.gitlab.com/ee/ci/variables/#cicd-variable-precedence
 default:
   image: node:18.18.2
-
 deploy_preview:
   stage: deploy
   except:
-    - main
+  - main
   script:
-    - npm install --global vercel
-    - vercel pull --yes --environment=preview --token=$VERCEL_TOKEN
-    - vercel deploy --token=$VERCEL_TOKEN --force
-
+  - npm install --global vercel
+  - vercel pull --yes --environment=preview --token=$VERCEL_TOKEN
+  - vercel deploy --token=$VERCEL_TOKEN --force
 deploy_production:
   stage: deploy
   only:
-    - main
+  - main
   script:
-    - npm install --global vercel
-    - vercel pull --yes --environment=production --token=$VERCEL_TOKEN
-    - vercel deploy --prod --token=$VERCEL_TOKEN --force
+  - npm install --global vercel
+  - vercel pull --yes --environment=production --token=$VERCEL_TOKEN
+  - vercel deploy --prod --token=$VERCEL_TOKEN --force
+stages:
+- test
+sast:
+  stage: test
+include:
+- template: Security/SAST.gitlab-ci.yml
