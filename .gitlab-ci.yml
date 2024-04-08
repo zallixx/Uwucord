@@ -27,8 +27,7 @@ deploy_production:
 eslint:
   stage: lint
   script:
-    - |
-      npm install eslint \
+    - npm install eslint \
       eslint-config-airbnb \
       eslint-config-prettier \
       eslint-plugin-flowtype \
