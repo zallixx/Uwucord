@@ -1,31 +1,28 @@
-"use client";
+'use client';
 
-import { Smile } from "lucide-react";
-import Picker from "@emoji-mart/react";
-import data from "@emoji-mart/data";
-import { useTheme } from "next-themes";
+import { Smile } from 'lucide-react';
+import Picker from '@emoji-mart/react';
+import data from '@emoji-mart/data';
+import { useTheme } from 'next-themes';
 
 import {
     Popover,
     PopoverContent,
     PopoverTrigger,
-} from "@/components/ui/popover";
+} from '@/components/ui/popover';
 
 interface EmojiPickerProps {
+    // eslint-disable-next-line no-unused-vars
     onChange: (value: string) => void;
 }
 
-export const EmojiPicker = ({
-                                onChange,
-                            }: EmojiPickerProps) => {
+function EmojiPicker({ onChange }: EmojiPickerProps) {
     const { resolvedTheme } = useTheme();
 
     return (
         <Popover>
             <PopoverTrigger>
-                <Smile
-                    className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition"
-                />
+                <Smile className="text-zinc-500 dark:text-zinc-400 hover:text-zinc-600 dark:hover:text-zinc-300 transition" />
             </PopoverTrigger>
             <PopoverContent
                 side="right"
@@ -39,5 +36,7 @@ export const EmojiPicker = ({
                 />
             </PopoverContent>
         </Popover>
-    )
+    );
 }
+
+export default EmojiPicker;

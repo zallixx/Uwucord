@@ -1,7 +1,5 @@
-
-
-export const ChatSidebar = async () => {
-    /*const profile = await currentProfile();
+const ChatSidebar = async () => {
+    /* const profile = await currentProfile();
 
     if (!profile) {
         return redirect("/")
@@ -34,3 +32,4 @@ export const ChatSidebar = async () => {
     );
     */
 };
+export default ChatSidebar;

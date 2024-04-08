@@ -1,11 +1,12 @@
-"use client";
+'use client';
 
-import axios from "axios";
-import * as z from "zod";
-import {zodResolver} from "@hookform/resolvers/zod";
-import {useForm} from "react-hook-form";
-import {useEffect} from "react";
+import axios from 'axios';
+import * as z from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { useEffect } from 'react';
 
+import { useRouter } from 'next/navigation';
 import {
     Dialog,
     DialogContent,
@@ -13,48 +14,47 @@ import {
     DialogFooter,
     DialogHeader,
     DialogTitle,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 import {
     Form,
     FormControl,
     FormField,
     FormItem,
     FormLabel,
-    FormMessage
-} from "@/components/ui/form";
-import {Input} from "@/components/ui/input";
-import {Button} from "@/components/ui/button";
-import {FileUpload} from "@/components/file-upload";
-import {useRouter} from "next/navigation";
-import {useModal} from "@/hooks/use-modal-store";
+    FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import FileUpload from '@/components/file-upload';
+import { useModal } from '@/hooks/use-modal-store';
 
 const formSchema = z.object({
     name: z.string().min(1, {
-        message: "Требуется ввести имя."
+        message: 'Требуется ввести имя.',
     }),
     imageUrl: z.string().min(1, {
-        message: "Требуется выбрать значок."
-    })
+        message: 'Требуется выбрать значок.',
+    }),
 });
-export const EditServerModal = () => {
-    const {isOpen, onClose, type, data} = useModal();
+function EditServerModal() {
+    const { isOpen, onClose, type, data } = useModal();
     const router = useRouter();
 
-    const isModalOpen = isOpen && type === "editServer";
-    const {server} = data;
+    const isModalOpen = isOpen && type === 'editServer';
+    const { server } = data;
 
     const form = useForm({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            name: "",
-            imageUrl: "",
-        }
+            name: '',
+            imageUrl: '',
+        },
     });
 
     useEffect(() => {
         if (server) {
-            form.setValue("name", server.name);
-            form.setValue("imageUrl", server.imageUrl);
+            form.setValue('name', server.name);
+            form.setValue('imageUrl', server.imageUrl);
         }
     }, [server, form]);
 
@@ -70,12 +70,12 @@ export const EditServerModal = () => {
         } catch (error) {
             console.log(error);
         }
-    }
+    };
 
     const handleClose = () => {
         form.reset();
         onClose();
-    }
+    };
 
     return (
         <Dialog open={isModalOpen} onOpenChange={handleClose}>
@@ -89,13 +89,16 @@ export const EditServerModal = () => {
                     </DialogDescription>
                 </DialogHeader>
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                    <form
+                        onSubmit={form.handleSubmit(onSubmit)}
+                        className="space-y-8"
+                    >
                         <div className="space-y-8 px-6">
                             <div className="flex items-center justify-center text-center">
                                 <FormField
                                     control={form.control}
                                     name="imageUrl"
-                                    render={({field}) => (
+                                    render={({ field }) => (
                                         <FormItem>
                                             <FormControl>
                                                 <FileUpload
@@ -112,11 +115,9 @@ export const EditServerModal = () => {
                             <FormField
                                 control={form.control}
                                 name="name"
-                                render={({field}) => (
+                                render={({ field }) => (
                                     <FormItem>
-                                        <FormLabel
-                                            className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70"
-                                        >
+                                        <FormLabel className="uppercase text-xs font-bold text-zinc-500 dark:text-secondary/70">
                                             Имя сервера
                                         </FormLabel>
                                         <FormControl>
@@ -127,7 +128,7 @@ export const EditServerModal = () => {
                                                 {...field}
                                             />
                                         </FormControl>
-                                        <FormMessage/>
+                                        <FormMessage />
                                     </FormItem>
                                 )}
                             />
@@ -141,5 +142,7 @@ export const EditServerModal = () => {
                 </Form>
             </DialogContent>
         </Dialog>
-    )
+    );
 }
+
+export default EditServerModal;

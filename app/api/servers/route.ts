@@ -1,17 +1,17 @@
-import {v4 as uuidv4} from "uuid";
+import { v4 as uuidv4 } from 'uuid';
 
-import {currentProfile} from "@/lib/current-profile";
-import {db} from "@/lib/db";
-import {NextResponse} from "next/server";
-import {MemberRole} from "@prisma/client";
+import { NextResponse } from 'next/server';
+import { MemberRole } from '@prisma/client';
+import currentProfile from '@/lib/current-profile';
+import { db } from '@/lib/db';
 
-export async function POST(req: Request) {
+async function POST(req: Request) {
     try {
-        const {name, imageUrl} = await req.json();
+        const { name, imageUrl } = await req.json();
         const profile = await currentProfile();
 
         if (!profile) {
-            return new NextResponse("Unauthorized", {status: 401});
+            return new NextResponse('Unauthorized', { status: 401 });
         }
 
         const server = await db.server.create({
@@ -21,20 +21,17 @@ export async function POST(req: Request) {
                 imageUrl,
                 inviteCode: uuidv4(),
                 channels: {
-                    create: [
-                        {name: "general", profileId: profile.id}
-                    ]
+                    create: [{ name: 'general', profileId: profile.id }],
                 },
                 members: {
-                    create: [
-                        {profileId: profile.id, role: MemberRole.ADMIN}
-                    ]
-                }
-            }
+                    create: [{ profileId: profile.id, role: MemberRole.ADMIN }],
+                },
+            },
         });
         return NextResponse.json(server);
     } catch (error) {
-        console.log("[POST_SERVERS]", error);
-        return new NextResponse("Internal Server Error", {status: 500});
+        console.log('[POST_SERVERS]', error);
+        return new NextResponse('Internal Server Error', { status: 500 });
     }
 }
+export default POST;

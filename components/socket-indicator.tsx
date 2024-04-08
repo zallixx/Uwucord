@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { useSocket } from "@/components/providers/socket-provider";
-import { Badge } from "@/components/ui/badge";
+import { useSocket } from '@/components/providers/socket-provider';
+import { Badge } from '@/components/ui/badge';
 
-export const SocketIndicator = () => {
+function SocketIndicator() {
     const { isConnected } = useSocket();
 
     if (!isConnected) {
@@ -14,7 +14,7 @@ export const SocketIndicator = () => {
             >
                 Переподключение
             </Badge>
-        )
+        );
     }
 
     return (
@@ -24,5 +24,7 @@ export const SocketIndicator = () => {
         >
             Онлайн
         </Badge>
-    )
+    );
 }
+
+export default SocketIndicator;

@@ -1,18 +1,16 @@
-import {redirectToSignIn} from "@clerk/nextjs";
-import {redirect} from "next/navigation";
+import { redirectToSignIn } from '@clerk/nextjs';
+import { redirect } from 'next/navigation';
 
-import {db} from "@/lib/db";
-import {currentProfile} from "@/lib/current-profile";
+import { db } from '@/lib/db';
+import currentProfile from '@/lib/current-profile';
 
 interface InviteCodePageProps {
     params: {
         inviteCode: string;
     };
-};
+}
 
-const InviteCodePage = async ({
-                                  params
-                              }: InviteCodePageProps) => {
+async function InviteCodePage({ params }: InviteCodePageProps) {
     const profile = await currentProfile();
 
     if (!profile) {
@@ -20,7 +18,7 @@ const InviteCodePage = async ({
     }
 
     if (!params.inviteCode) {
-        return redirect("/");
+        return redirect('/');
     }
 
     const existingServer = await db.server.findFirst({
@@ -28,16 +26,15 @@ const InviteCodePage = async ({
             inviteCode: params.inviteCode,
             members: {
                 some: {
-                    profileId: profile.id
-                }
-            }
-        }
+                    profileId: profile.id,
+                },
+            },
+        },
     });
 
     if (existingServer) {
         return redirect(`/servers/${existingServer.id}`);
     }
-
 
     const server = await db.server.update({
         where: {
@@ -48,10 +45,10 @@ const InviteCodePage = async ({
                 create: [
                     {
                         profileId: profile.id,
-                    }
-                ]
-            }
-        }
+                    },
+                ],
+            },
+        },
     });
 
     if (server) {
