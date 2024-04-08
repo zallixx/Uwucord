@@ -4,7 +4,8 @@ import { NextResponse } from 'next/server';
 import currentProfile from '@/lib/current-profile';
 import { db } from '@/lib/db';
 
-async function PATCH(
+// eslint-disable-next-line import/prefer-default-export
+export async function PATCH(
     req: Request,
     { params }: { params: { serverId: string } },
 ) {
@@ -35,5 +36,3 @@ async function PATCH(
         return new NextResponse('Internal Error', { status: 500 });
     }
 }
-
-export default PATCH;

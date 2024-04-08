@@ -5,7 +5,8 @@ import { MemberRole } from '@prisma/client';
 import currentProfile from '@/lib/current-profile';
 import { db } from '@/lib/db';
 
-async function POST(req: Request) {
+// eslint-disable-next-line import/prefer-default-export
+export async function POST(req: Request) {
     try {
         const { name, imageUrl } = await req.json();
         const profile = await currentProfile();
@@ -34,4 +35,3 @@ async function POST(req: Request) {
         return new NextResponse('Internal Server Error', { status: 500 });
     }
 }
-export default POST;

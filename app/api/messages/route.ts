@@ -6,7 +6,8 @@ import { db } from '@/lib/db';
 
 const MESSAGES_BATCH = 10;
 
-async function GET(req: Request) {
+// eslint-disable-next-line import/prefer-default-export
+export async function GET(req: Request) {
     try {
         const profile = await currentProfile();
         const { searchParams } = new URL(req.url);
@@ -79,5 +80,3 @@ async function GET(req: Request) {
         return new NextResponse('Internal Error', { status: 500 });
     }
 }
-
-export default GET;

@@ -1,5 +1,5 @@
 import { Avatar, AvatarImage } from '@/components/ui/avatar';
-import { cn } from '@/lib/utils';
+import cn from '@/lib/utils';
 
 interface UserAvatarProps {
     // eslint-disable-next-line react/require-default-props
