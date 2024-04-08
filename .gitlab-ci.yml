@@ -1,6 +1,11 @@
 
 default:
   image: node:18.18.2
+
+stages:
+  - lint
+  - deploy
+
 deploy_preview:
   stage: deploy
   except:
@@ -8,7 +13,8 @@ deploy_preview:
   script:
   - npm install --global vercel
   - vercel pull --yes --environment=preview --token=$VERCEL_TOKEN
-  - vercel deploy --token=$VERCEL_TOKEN --force
+  - vercel deploy --token=$VERCEL_TOKEN
+
 deploy_production:
   stage: deploy
   only:
@@ -16,4 +22,18 @@ deploy_production:
   script:
   - npm install --global vercel
   - vercel pull --yes --environment=production --token=$VERCEL_TOKEN
-  - vercel deploy --prod --token=$VERCEL_TOKEN --force
+  - vercel deploy --prod --token=$VERCEL_TOKEN
+
+eslint:
+  stage: lint
+  script:
+    - |
+      npm install eslint \
+      eslint-config-airbnb \
+      eslint-config-prettier \
+      eslint-plugin-flowtype \
+      eslint-plugin-import \
+      eslint-plugin-jsx-a11y \
+      eslint-plugin-prettier \
+      eslint-plugin-react
+    - node_modules/eslint/bin/eslint.js .
