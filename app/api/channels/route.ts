@@ -4,7 +4,8 @@ import { MemberRole } from '@prisma/client';
 import currentProfile from '@/lib/current-profile';
 import { db } from '@/lib/db';
 
-async function POST(req: Request) {
+// eslint-disable-next-line import/prefer-default-export
+export async function POST(req: Request) {
     try {
         const profile = await currentProfile();
         const { name, type } = await req.json();
@@ -56,4 +57,4 @@ async function POST(req: Request) {
     }
 }
 
-export default POST;
+
