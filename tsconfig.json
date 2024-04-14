@@ -28,6 +28,9 @@
     }
   },
   "include": [
+    ".eslintrc.js",
+    "electron/main.js",
+    "postcss.config.js",
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
@@ -36,6 +39,5 @@
   ],
   "exclude": [
     "node_modules",
-    "src-tauri"
   ]
 }

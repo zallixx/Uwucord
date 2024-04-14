@@ -1,8 +1,8 @@
-"use client";
+'use client';
 
-import axios from "axios";
-import {useState} from "react";
-import {useRouter} from "next/navigation";
+import axios from 'axios';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import {
     Dialog,
@@ -11,16 +11,16 @@ import {
     DialogFooter,
     DialogHeader,
     DialogTitle,
-} from "@/components/ui/dialog";
-import {useModal} from "@/hooks/use-modal-store";
-import {Button} from "@/components/ui/button";
+} from '@/components/ui/dialog';
+import { useModal } from '@/hooks/use-modal-store';
+import { Button } from '@/components/ui/button';
 
-export const LeaveServerModal = () => {
-    const {isOpen, onClose, type, data} = useModal();
+function LeaveServerModal() {
+    const { isOpen, onClose, type, data } = useModal();
     const router = useRouter();
 
-    const isModalOpen = isOpen && type === "leaveServer";
-    const {server} = data;
+    const isModalOpen = isOpen && type === 'leaveServer';
+    const { server } = data;
 
     const [isLoading, setIsLoading] = useState(false);
 
@@ -32,13 +32,13 @@ export const LeaveServerModal = () => {
 
             onClose();
             router.refresh();
-            router.push("/");
+            router.push('/');
         } catch (error) {
             console.log(error);
         } finally {
             setIsLoading(false);
         }
-    }
+    };
 
     return (
         <Dialog open={isModalOpen} onOpenChange={onClose}>
@@ -48,8 +48,11 @@ export const LeaveServerModal = () => {
                         Покинуть сервер
                     </DialogTitle>
                     <DialogDescription className="text-center text-zinc-500">
-                        Вы уверен, что хотите покинуть <span
-                        className="font-semibold text-indigo-500">{server?.name}</span>?
+                        Вы уверен, что хотите покинуть{' '}
+                        <span className="font-semibold text-indigo-500">
+                            {server?.name}
+                        </span>
+                        ?
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter className="bg-gray-100 px-6 py-4">
@@ -72,5 +75,7 @@ export const LeaveServerModal = () => {
                 </DialogFooter>
             </DialogContent>
         </Dialog>
-    )
+    );
 }
+
+export default LeaveServerModal;
