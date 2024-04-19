@@ -53,6 +53,7 @@ function ChatInput({ apiUrl, query, name, type }: ChatInputProps) {
         }
     };
 
+
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -62,7 +63,7 @@ function ChatInput({ apiUrl, query, name, type }: ChatInputProps) {
                     render={({ field }) => (
                         <FormItem>
                             <FormControl>
-                                <div className="relative p-4 pb-6">
+                                <div style={{ position: 'fixed', left: 312, right: 0, bottom: 0, padding: '10px', background: 'bg', zIndex: 0 }} className="relative p-4 pb-6">
                                     {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
                                     <button
                                         type="button"
@@ -72,7 +73,7 @@ function ChatInput({ apiUrl, query, name, type }: ChatInputProps) {
                                                 query,
                                             })
                                         }
-                                        className="absolute top-7 left-8 h-[24px] w-[24px] bg-zinc-500 dark:bg-zinc-400 hover:bg-zinc-600 dark:hover:bg-zinc-300 transition rounded-full p-1 flex items-center justify-center"
+                                        className="absolute top-1/2 left-8 transform -translate-x-1/2 -translate-y-1/2 h-[24px] w-[24px] bg-zinc-500 dark:bg-zinc-400 hover:bg-zinc-600 dark:hover:bg-zinc-300 transition rounded-full p-1 flex items-center justify-center"
                                     >
                                         <Plus className="text-white dark:text-[#313338]" />
                                     </button>
@@ -82,7 +83,7 @@ function ChatInput({ apiUrl, query, name, type }: ChatInputProps) {
                                         placeholder={`Написать ${type === 'conversation' ? name : `#${name}`}`}
                                         {...field}
                                     />
-                                    <div className="absolute top-7 right-8">
+                                    <div className="absolute top-1/2 right-2 transform -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
                                         <EmojiPicker
                                             onChange={(emoji: string) =>
                                                 field.onChange(
