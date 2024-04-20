@@ -53,7 +53,6 @@ function ChatInput({ apiUrl, query, name, type }: ChatInputProps) {
         }
     };
 
-
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)}>
@@ -63,7 +62,18 @@ function ChatInput({ apiUrl, query, name, type }: ChatInputProps) {
                     render={({ field }) => (
                         <FormItem>
                             <FormControl>
-                                <div style={{ position: 'fixed', left: 312, right: 0, bottom: 0, padding: '10px', background: 'bg', zIndex: 0 }} className="relative p-4 pb-6">
+                                <div
+                                    style={{
+                                        position: 'fixed',
+                                        left: 312,
+                                        right: 0,
+                                        bottom: 0,
+                                        padding: '10px',
+                                        background: 'bg',
+                                        zIndex: 0,
+                                    }}
+                                    className="relative p-4 pb-6"
+                                >
                                     {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
                                     <button
                                         type="button"

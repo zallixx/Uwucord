@@ -1,4 +1,4 @@
-const ChatSidebar = async () => {
+function ChatSidebar() {
     /* const profile = await currentProfile();
 
     if (!profile) {
@@ -17,19 +17,7 @@ const ChatSidebar = async () => {
             participants: true,
         }
     });
-
-    return (
-        <div className="">
-            {chats.map((chat) => (
-                <div key={chat.id} className="">
-                    <ChatItem
-                        id={chat.id}
-                        name={chat.name}
-                    />
-                </div>
-            ))}
-        </div>
-    );
     */
-};
+    return <div className="" />;
+}
 export default ChatSidebar;

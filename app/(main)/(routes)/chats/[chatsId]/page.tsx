@@ -5,6 +5,8 @@ import { useState } from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import ActionTooltip from '@/components/action-tooltip';
+import ChatSidebar from '@/components/chat/chat-sidebar';
+import DmSearch from '@/components/dm/dm-search';
 
 function ChatsIdPage() {
     const [typeOfTopSection, setTypeOfTopSection] = useState('friends');
@@ -12,12 +14,7 @@ function ChatsIdPage() {
     return (
         <div className="flex h-screen">
             <div className="w-60 bg-[#2b2d31]">
-                <button
-                    type="button"
-                    className="h-[28px] mx-4 my-2 px-4 text-[#949ba4] rounded-md bg-[#1e1f22] text-sm"
-                >
-                    Найти или начать беседу
-                </button>
+                <DmSearch />
                 <Separator />
                 <ScrollArea>
                     <button
@@ -44,6 +41,7 @@ function ChatsIdPage() {
                             </button>
                         </ActionTooltip>
                     </p>
+                    <ChatSidebar />
                 </ScrollArea>
             </div>
             <div className="flex-1 flex flex-col">
