@@ -66,14 +66,14 @@ async function ChatSidebar() {
     }
 
     function getChatInfo(chat: Chat) {
-
         let img_link, chat_name;
-        if (chat.memberOne.profile.id !== profile?.id) {
+
+        if (chat.memberOne.profile.userId !== profile?.userId) {
             img_link = chat.memberOne.profile.imageUrl;
             chat_name = chat.memberOne.profile.name;
-        } else if (chat.memberTwo.profile.id !== profile?.id) {
+        } else if (chat.memberTwo.profile.userId !== profile?.userId) {
             img_link = chat.memberTwo.profile.imageUrl;
-            chat_name = chat.memberOne.profile.name;
+            chat_name = chat.memberTwo.profile.name;
         }
         return { img_link, chat_name };
       }
