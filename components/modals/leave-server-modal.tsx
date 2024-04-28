@@ -48,10 +48,9 @@ function LeaveServerModal() {
                         Покинуть сервер
                     </DialogTitle>
                     <DialogDescription className="text-center text-zinc-500">
-                        Вы уверен, что хотите покинуть
-                        {' '}
-                        <span className="font-semibold text-indigo-500">{server?.name}</span>
-                        ?
+                        Вы уверены, что хотите покинуть{' '}
+                        <span className="font-semibold text-indigo-500">{server?.name}</span>{/*
+                        */}?
                     </DialogDescription>
                 </DialogHeader>
                 <DialogFooter className="bg-gray-100 px-6 py-4">
