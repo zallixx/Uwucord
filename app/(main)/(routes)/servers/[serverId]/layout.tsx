@@ -9,8 +9,8 @@ async function ServerIdLayout({
     children,
     params,
 }: {
-    children: React.ReactNode;
-    params: { serverId: string };
+    readonly children: Readonly<React.ReactNode>;
+    readonly params:  Readonly<{ serverId: string }>;
 }) {
     const profile = await currentProfile();
 
