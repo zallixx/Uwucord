@@ -9,6 +9,34 @@ import currentProfile from "@/lib/current-profile";
 
 import ChatSidebarItem from "@/components/chat/chat-sidebar-item";
 
+interface Chat {
+    id: string;
+    memberOneId: string;
+    memberTwoId: string;
+    memberOne: {
+        profile: {
+            id: string;
+            userId: string;
+            name: string;
+            imageUrl: string;
+            email: string;
+            createdAt: Date;
+            updatedAt: Date;
+        };
+    };
+    memberTwo: {
+        profile: {
+            id: string;
+            userId: string;
+            name: string;
+            imageUrl: string;
+            email: string;
+            createdAt: Date;
+            updatedAt: Date;
+        };
+    };
+}
+
 async function ChatSidebar() {
     const profile = await currentProfile();
 
@@ -37,17 +65,16 @@ async function ChatSidebar() {
         });
     }
 
-    function getChatInfo(chat) {
-        let img_link, chat_name;
+    function getChatInfo(chat: Chat) {
 
-        if (chat.memberOne.profileId !== profile?.id) {
+        let img_link, chat_name;
+        if (chat.memberOne.profile.id !== profile?.id) {
             img_link = chat.memberOne.profile.imageUrl;
             chat_name = chat.memberOne.profile.name;
-        } else if (chat.memberTwo.profileId !== profile?.id) {
+        } else if (chat.memberTwo.profile.id !== profile?.id) {
             img_link = chat.memberTwo.profile.imageUrl;
             chat_name = chat.memberOne.profile.name;
         }
-
         return { img_link, chat_name };
       }
 
@@ -87,8 +114,7 @@ async function ChatSidebar() {
                     return (
                         <ChatSidebarItem
                             key={chat.id}
-                            img_url={img_link}
-                            chat_name={chat_name}
+                            params={{ img_url: img_link, chat_name: chat_name }}
                         />
                     );
                 })}
