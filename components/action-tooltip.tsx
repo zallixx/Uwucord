@@ -9,12 +9,12 @@ import {
 } from '@/components/ui/tooltip';
 
 interface ActionTooltipProps {
-    label: string;
-    children: React.ReactNode;
+    readonly label: string;
+    readonly children: React.ReactNode;
     // eslint-disable-next-line react/require-default-props
-    side?: 'top' | 'right' | 'bottom' | 'left';
+    readonly side?: 'top' | 'right' | 'bottom' | 'left';
     // eslint-disable-next-line react/require-default-props
-    align?: 'start' | 'center' | 'end';
+    readonly align?: 'start' | 'center' | 'end';
 }
 
 function ActionTooltip({ label, children, side, align }: ActionTooltipProps) {

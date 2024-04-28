@@ -5,11 +5,11 @@ import UserAvatar from '@/components/user-avatar';
 import SocketIndicator from '@/components/socket-indicator';
 
 interface ChatHeaderProps {
-    serverId: string;
-    name: string;
-    type: 'channel' | 'conversation';
+    readonly serverId: string;
+    readonly name: string;
+    readonly type: 'channel' | 'conversation';
     // eslint-disable-next-line react/require-default-props
-    imageUrl?: string;
+    readonly imageUrl?: string;
 }
 
 function ChatHeader({ serverId, name, type, imageUrl }: ChatHeaderProps) {
