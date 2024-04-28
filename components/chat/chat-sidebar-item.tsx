@@ -20,6 +20,7 @@ function ChatSidebarItem({ params }: Readonly<ChatSidebarItemProps>) {
                 <img
                     src={params.img_url}
                     className="w-[32px] h-[32px] rounded-full mr-4 my-1 mx-1"
+                    alt={""}
                 />
                 <p className="text-sm text-[#dbdee1]">{params.chat_name}</p>
                 <X size={18} className={`ml-auto mr-3 ${isHovered ? "opacity-90" : "opacity-0"}`} />

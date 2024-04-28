@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 export default function RootLayout({
     children,
 }: {
-    children: React.ReactNode;
+    readonly children: Readonly<React.ReactNode>;
 }) {
     return (
         <ClerkProvider>

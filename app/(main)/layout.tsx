@@ -1,7 +1,7 @@
 import React from 'react';
 import NavigationSidebar from '@/components/navigation/navigation-sidebar';
 
-function MainLayout({ children }: { children: React.ReactNode }) {
+function MainLayout({ children }: { readonly children: Readonly<React.ReactNode> }) {
     return (
         <div className="h-full">
             <div className="hidden md:flex h-full w-[72px] z-30 flex-col fixed inset-y-0">
