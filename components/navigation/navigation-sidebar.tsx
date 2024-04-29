@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation';
 import { UserButton } from '@clerk/nextjs';
+import { Server } from '@prisma/client';
 import currentProfile from '@/lib/current-profile';
 
 import { db } from '@/lib/db';
@@ -9,7 +10,6 @@ import { Separator } from '@/components/ui/separator';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import NavigationItem from '@/components/navigation/navigation-item';
 import ModeToggle from '@/components/mode-toggle';
-import { Server } from '@prisma/client';
 
 async function NavigationSidebar() {
     const profile = await currentProfile();
@@ -30,8 +30,8 @@ async function NavigationSidebar() {
 
     return (
         <div className="space-y-2 flex flex-col items-center h-full text-primary w-full dark:bg-[#1E1F22] py-0">
-            <NavigationPrivateMessages/>
-            <Separator className="h-[2px] bg-zinc-300 dark:bg-zinc-700 rounded-md w-8 mx-auto mb-2"/>
+            <NavigationPrivateMessages />
+            <Separator className="h-[2px] bg-zinc-300 dark:bg-zinc-700 rounded-md w-8 mx-auto mb-2" />
             <ScrollArea className="flex-1 w-full">
                 {servers.map((server: Server) => (
                     <div key={server.id} className="mb-2">

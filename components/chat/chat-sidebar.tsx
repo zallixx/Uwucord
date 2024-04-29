@@ -1,13 +1,12 @@
-import DmSearch from "@/components/dm/dm-search";
-import {Separator} from "@/components/ui/separator";
-import {ScrollArea} from "@/components/ui/scroll-area";
-import {Plus, Users} from "lucide-react";
-import ActionTooltip from "@/components/action-tooltip";
+import { PrismaClient } from '@prisma/client';
+import { Plus, Users } from 'lucide-react';
+import currentProfile from '@/lib/current-profile';
+import DmSearch from '@/components/dm/dm-search';
+import { Separator } from '@/components/ui/separator';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import ActionTooltip from '@/components/action-tooltip';
 
-import {PrismaClient} from '@prisma/client';
-import currentProfile from "@/lib/current-profile";
-
-import ChatSidebarItem from "@/components/chat/chat-sidebar-item";
+import ChatSidebarItem from '@/components/chat/chat-sidebar-item';
 
 interface Chat {
     id: string;
@@ -66,55 +65,52 @@ async function ChatSidebar() {
     }
 
     function getChatInfo(chat: Chat) {
-        let img_link, chat_name;
+        let imgLink;
+        let chatName;
 
         if (chat.memberOne.profile.userId !== profile?.userId) {
-            img_link = chat.memberOne.profile.imageUrl;
-            chat_name = chat.memberOne.profile.name;
+            imgLink = chat.memberOne.profile.imageUrl;
+            chatName = chat.memberOne.profile.name;
         } else if (chat.memberTwo.profile.userId !== profile?.userId) {
-            img_link = chat.memberTwo.profile.imageUrl;
-            chat_name = chat.memberTwo.profile.name;
+            imgLink = chat.memberTwo.profile.imageUrl;
+            chatName = chat.memberTwo.profile.name;
         }
-        return { img_link, chat_name };
-      }
+        return { imgLink, chatName };
+    }
 
     const chats = await findChatsByUser();
 
     return (
         <div className="w-60 bg-[#2b2d31]">
             <ScrollArea>
-                <DmSearch/>
-                <Separator/>
+                <DmSearch />
+                <Separator />
                 <button
                     type="button"
                     className="mx-2 mt-[8px] h-[42px] w-[224px] text-[#949ba4] rounded-md bg-transparent text-sm relative hover:bg-[#36373d] hover:text-[#dbdee1]"
                 >
-                    <Users className="absolute left-4" strokeWidth={2}/>
+                    <Users className="absolute left-4" strokeWidth={2} />
                     <span className="pr-16">Друзья</span>
                 </button>
                 <p className="mx-6 mt-[12px] flex flex-row text-[#949ba4] text-xs font-bold hover:text-[#dbdee1]">
                     ЛИЧНЫЕ СООБЩЕНИЯ
-                    <ActionTooltip
-                        side="top"
-                        align="center"
-                        label="Создать ЛС"
-                    >
+                    <ActionTooltip side="top" align="center" label="Создать ЛС">
                         {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
                         <button
                             type="button"
                             className="group flex items-center absolute right-4"
                         >
-                            <Plus className="text-[#949ba4]" size={14}/>
+                            <Plus className="text-[#949ba4]" size={14} />
                         </button>
                     </ActionTooltip>
                 </p>
-                <Separator/>
+                <Separator />
                 {chats.map((chat) => {
-                    const { img_link, chat_name } = getChatInfo(chat);
+                    const { imgLink, chatName } = getChatInfo(chat);
                     return (
                         <ChatSidebarItem
                             key={chat.id}
-                            params={{ img_url: img_link, chat_name: chat_name }}
+                            params={{ imgLink, chatName }}
                         />
                     );
                 })}
