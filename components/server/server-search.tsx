@@ -14,7 +14,7 @@ import {
 } from '@/components/ui/command';
 
 interface ServerSearchProps {
-    data: {
+    readonly data: {
         label: string;
         type: 'channel' | 'member';
         data:

@@ -20,15 +20,15 @@ type MessageWithMemberWithProfile = Message & {
 };
 
 interface ChatMessagesProps {
-    name: string;
-    member: Member;
-    chatId: string;
-    apiUrl: string;
-    socketUrl: string;
-    socketQuery: Record<string, string>;
-    paramKey: 'channelId' | 'conversationId';
-    paramValue: string;
-    type: 'channel' | 'conversation';
+    readonly name: string;
+    readonly member: Member;
+    readonly chatId: string;
+    readonly apiUrl: string;
+    readonly socketUrl: string;
+    readonly socketQuery: Record<string, string>;
+    readonly paramKey: 'channelId' | 'conversationId';
+    readonly paramValue: string;
+    readonly type: 'channel' | 'conversation';
 }
 
 function ChatMessages({

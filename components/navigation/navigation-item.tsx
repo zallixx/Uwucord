@@ -7,9 +7,9 @@ import cn from '@/lib/utils';
 import ActionTooltip from '@/components/action-tooltip';
 
 interface NavigationItemProps {
-    id: string;
-    imageUrl: string;
-    name: string;
+    readonly id: string;
+    readonly imageUrl: string;
+    readonly name: string;
 }
 
 function NavigationItem({ id, imageUrl, name }: NavigationItemProps) {

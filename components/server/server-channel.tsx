@@ -10,10 +10,10 @@ import ActionTooltip from '@/components/action-tooltip';
 import { ModalType, useModal } from '@/hooks/use-modal-store';
 
 interface ServerChannelProps {
-    channel: Channel;
-    server: Server;
+    readonly channel: Channel;
+    readonly server: Server;
     // eslint-disable-next-line react/require-default-props
-    role?: MemberRole;
+    readonly role?: MemberRole;
 }
 
 const iconMap = {

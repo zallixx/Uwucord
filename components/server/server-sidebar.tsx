@@ -12,7 +12,7 @@ import currentProfile from '@/lib/current-profile';
 import { db } from '@/lib/db';
 
 interface ServerSidebarProps {
-    serverId: string;
+    readonly serverId: string;
 }
 
 const iconMap = {

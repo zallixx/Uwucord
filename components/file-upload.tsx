@@ -9,9 +9,9 @@ import '@uploadthing/react/styles.css';
 
 interface FileUploadProps {
     // eslint-disable-next-line no-unused-vars
-    onChange: (url?: string) => void;
-    value: string;
-    endpoint: 'messageFile' | 'serverImage';
+    readonly onChange: (url?: string) => void;
+    readonly value: string;
+    readonly endpoint: 'messageFile' | 'serverImage';
 }
 
 function FileUpload({ onChange, value, endpoint }: FileUploadProps) {

@@ -20,18 +20,18 @@ import { Button } from '@/components/ui/button';
 import { useModal } from '@/hooks/use-modal-store';
 
 interface ChatItemProps {
-    id: string;
-    content: string;
-    member: Member & {
-        profile: Profile;
+    readonly id: string;
+    readonly content: string;
+    readonly member: Member & {
+        readonly profile: Profile;
     };
-    timestamp: string;
-    fileUrl: string | null;
-    deleted: boolean;
-    currentMember: Member;
-    isUpdated: boolean;
-    socketUrl: string;
-    socketQuery: Record<string, string>;
+    readonly timestamp: string;
+    readonly fileUrl: string | null;
+    readonly deleted: boolean;
+    readonly currentMember: Member;
+    readonly isUpdated: boolean;
+    readonly socketUrl: string;
+    readonly socketQuery: Record<string, string>;
 }
 
 const roleIconMap = {

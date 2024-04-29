@@ -13,7 +13,7 @@ import {
 
 interface EmojiPickerProps {
     // eslint-disable-next-line no-unused-vars
-    onChange: (value: string) => void;
+    readonly onChange: (value: string) => void;
 }
 
 function EmojiPicker({ onChange }: EmojiPickerProps) {

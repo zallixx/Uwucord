@@ -8,14 +8,14 @@ import ActionTooltip from '@/components/action-tooltip';
 import { useModal } from '@/hooks/use-modal-store';
 
 interface ServerSectionProps {
-    label: string;
+    readonly label: string;
     // eslint-disable-next-line react/require-default-props
-    role?: MemberRole;
-    sectionType: 'channels' | 'members';
+    readonly role?: MemberRole;
+    readonly sectionType: 'channels' | 'members';
     // eslint-disable-next-line react/require-default-props
-    channelType?: ChannelType;
+    readonly channelType?: ChannelType;
     // eslint-disable-next-line react/no-unused-prop-types,react/require-default-props
-    server?: ServerWithMembersWithProfiles;
+    readonly server?: ServerWithMembersWithProfiles;
 }
 
 function ServerSection({
