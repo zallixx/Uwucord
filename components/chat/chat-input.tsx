@@ -14,10 +14,10 @@ import { useModal } from '@/hooks/use-modal-store';
 import EmojiPicker from '@/components/emoji-picker';
 
 interface ChatInputProps {
-    apiUrl: string;
-    query: Record<string, any>;
-    name: string;
-    type: 'conversation' | 'channel';
+    readonly apiUrl: string;
+    readonly query: Record<string, any>;
+    readonly name: string;
+    readonly type: 'conversation' | 'channel';
 }
 
 const formSchema = z.object({
