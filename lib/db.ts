@@ -2,7 +2,7 @@ import { PrismaClient } from '@prisma/client';
 
 declare global {
     // eslint-disable-next-line no-unused-vars,vars-on-top,no-var
-    let prisma: PrismaClient | undefined;
+    var prisma: PrismaClient | undefined;
 }
 
 // eslint-disable-next-line no-undef,import/prefer-default-export
