@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation';
 import { UserButton } from '@clerk/nextjs';
+import { Server } from '@prisma/client';
 import currentProfile from '@/lib/current-profile';
 
 import { db } from '@/lib/db';
@@ -32,7 +33,7 @@ async function NavigationSidebar() {
             <NavigationPrivateMessages />
             <Separator className="h-[2px] bg-zinc-300 dark:bg-zinc-700 rounded-md w-8 mx-auto mb-2" />
             <ScrollArea className="flex-1 w-full">
-                {servers.map((server) => (
+                {servers.map((server: Server) => (
                     <div key={server.id} className="mb-2">
                         <NavigationItem
                             id={server.id}

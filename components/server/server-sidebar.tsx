@@ -1,4 +1,4 @@
-import { ChannelType, MemberRole } from '@prisma/client';
+import { ChannelType, MemberRole, Channel, Member } from '@prisma/client';
 import { redirect } from 'next/navigation';
 import { Hash, Mic, ShieldAlert, ShieldCheck } from 'lucide-react';
 
@@ -57,13 +57,13 @@ async function ServerSidebar({ serverId }: ServerSidebarProps) {
     });
 
     const textChannels = server?.channels.filter(
-        (channel) => channel.type === ChannelType.TEXT,
+        (channel: Channel) => channel.type === ChannelType.TEXT,
     );
     const audioChannels = server?.channels.filter(
-        (channel) => channel.type === ChannelType.AUDIO,
+        (channel: Channel) => channel.type === ChannelType.AUDIO,
     );
     const members = server?.members.filter(
-        (member) => member.profileId !== profile.id,
+        (member: Member) => member.profileId !== profile.id,
     );
 
     if (!server) {
@@ -71,7 +71,7 @@ async function ServerSidebar({ serverId }: ServerSidebarProps) {
     }
 
     const role = server.members.find(
-        (member) => member.profileId === profile.id,
+        (member: Member) => member.profileId === profile.id,
     )?.role;
 
     return (
@@ -84,7 +84,7 @@ async function ServerSidebar({ serverId }: ServerSidebarProps) {
                             {
                                 label: 'Текстовые Каналы',
                                 type: 'channel',
-                                data: textChannels?.map((channel) => ({
+                                data: textChannels?.map((channel: Channel) => ({
                                     id: channel.id,
                                     name: channel.name,
                                     icon: iconMap[channel.type],
@@ -93,17 +93,20 @@ async function ServerSidebar({ serverId }: ServerSidebarProps) {
                             {
                                 label: 'Голосовые Каналы',
                                 type: 'channel',
-                                data: audioChannels?.map((channel) => ({
-                                    id: channel.id,
-                                    name: channel.name,
-                                    icon: iconMap[channel.type],
-                                })),
+                                data: audioChannels?.map(
+                                    (channel: Channel) => ({
+                                        id: channel.id,
+                                        name: channel.name,
+                                        icon: iconMap[channel.type],
+                                    }),
+                                ),
                             },
                             {
                                 label: 'Members',
                                 type: 'member',
-                                data: members?.map((member) => ({
+                                data: members?.map((member: Member) => ({
                                     id: member.id,
+                                    // @ts-ignore
                                     name: member.profile.name,
                                     icon: roleIconMap[member.role],
                                 })),
@@ -121,7 +124,7 @@ async function ServerSidebar({ serverId }: ServerSidebarProps) {
                             label="Текстовые каналы"
                         />
                         <div className="space-y-[2px]">
-                            {textChannels.map((channel) => (
+                            {textChannels.map((channel: Channel) => (
                                 <ServerChannel
                                     key={channel.id}
                                     channel={channel}
@@ -141,7 +144,7 @@ async function ServerSidebar({ serverId }: ServerSidebarProps) {
                             label="Голосовые каналы"
                         />
                         <div className="space-y-[2px]">
-                            {audioChannels.map((channel) => (
+                            {audioChannels.map((channel: Channel) => (
                                 <ServerChannel
                                     key={channel.id}
                                     channel={channel}
