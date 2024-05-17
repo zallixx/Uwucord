@@ -10,9 +10,9 @@ import ChatSidebarItem from '@/components/chat/chat-sidebar-item';
 
 interface Chat {
     id: string;
-    memberOneId: string;
-    memberTwoId: string;
-    memberOne: {
+    profileOneId: string;
+    profileTwoId: string;
+    profileOne: {
         profile: {
             id: string;
             userId: string;
@@ -23,7 +23,7 @@ interface Chat {
             updatedAt: Date;
         };
     };
-    memberTwo: {
+    profileTwo: {
         profile: {
             id: string;
             userId: string;
@@ -45,17 +45,17 @@ async function ChatSidebar() {
         return prisma.conversation.findMany({
             where: {
                 OR: [
-                    { memberOne: { profileId: profile?.id } },
-                    { memberTwo: { profileId: profile?.id } },
+                    { profileOne: { profileId: profile?.id } },
+                    { profileTwo: { profileId: profile?.id } },
                 ],
             },
             include: {
-                memberOne: {
+                profileOne: {
                     select: {
                         profile: true,
                     },
                 },
-                memberTwo: {
+                profileTwo: {
                     select: {
                         profile: true,
                     },
@@ -68,12 +68,12 @@ async function ChatSidebar() {
         let imgLink;
         let chatName;
 
-        if (chat.memberOne.profile.userId !== profile?.userId) {
-            imgLink = chat.memberOne.profile.imageUrl;
-            chatName = chat.memberOne.profile.name;
-        } else if (chat.memberTwo.profile.userId !== profile?.userId) {
-            imgLink = chat.memberTwo.profile.imageUrl;
-            chatName = chat.memberTwo.profile.name;
+        if (chat.profileOne.profile.userId !== profile?.userId) {
+            imgLink = chat.profileOne.profile.imageUrl;
+            chatName = chat.profileOne.profile.name;
+        } else if (chat.profileTwo.profile.userId !== profile?.userId) {
+            imgLink = chat.profileTwo.profile.imageUrl;
+            chatName = chat.profileTwo.profile.name;
         }
         return { imgLink, chatName };
     }
