@@ -62,9 +62,3 @@ deploy_production:
     - npm install --global vercel
     - vercel pull --yes --environment=production --token=$VERCEL_TOKEN
     - vercel deploy --prod --token=$VERCEL_TOKEN
-
-eslint:
-  stage: lint
-  script:
-    - npm install eslint eslint-config-airbnb eslint-config-prettier eslint-plugin-flowtype eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-prettier eslint-plugin-react
-    - npx eslint .
