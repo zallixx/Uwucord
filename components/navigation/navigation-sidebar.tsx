@@ -28,9 +28,9 @@ async function NavigationSidebar() {
     });
 
     return (
-        <div className="space-y-2 flex flex-col items-center h-full text-primary w-full dark:bg-[#1E1F22] py-0">
+        <div className="space-y-2 flex flex-col items-center h-full text-primary w-full dark:bg-[#1E1F22] py-3">
             <NavigationPrivateMessages />
-            <Separator className="h-[2px] bg-zinc-300 dark:bg-zinc-700 rounded-md w-8 mx-auto mb-2" />
+            <Separator className="h-[2px] bg-zinc-300 dark:bg-zinc-700 rounded-md w-8 mx-auto" />
             <ScrollArea className="flex-1 w-full">
                 {servers.map((server) => (
                     <div key={server.id} className="mb-2">

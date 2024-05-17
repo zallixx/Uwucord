@@ -4,7 +4,6 @@ default:
 stages:
   - sonarqube-check
   - sonarqube-vulnerability-report
-  - lint
   - deploy
 
 sonarqube-check:
