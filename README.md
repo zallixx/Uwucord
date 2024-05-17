@@ -1,5 +1,7 @@
 ## Uwucord: милый аналог Discord
 
+[![Quality gate](http://19.ip.gl.ply.gg:20786/api/project_badges/quality_gate?project=T_Dark_uwucord_816c0139-ab66-4fe7-8c1b-4f24db8e0239&token=sqb_9880ce267c9bed60f05cac502230aaac09421e25)](http://19.ip.gl.ply.gg:20786/dashboard?id=T_Dark_uwucord_816c0139-ab66-4fe7-8c1b-4f24db8e0239)
+
 **Описание:**
 
 Uwucord - это милый аналог Discord, созданный с использованием современных веб-технологий. Он позволяет вам общаться с друзьями, играть в игры, делиться файлами и многое другое.

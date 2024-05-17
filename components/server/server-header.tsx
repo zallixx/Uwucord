@@ -44,7 +44,7 @@ function ServerHeader({ server, role }: ServerHeaderProps) {
                     <ChevronDown className="h-5 w-5 ml-auto" />
                 </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-56  text-[10px] font-normal text-black dark:text-neutral-400 space-y-[2px] bg-zinc-950/80">
+            <DropdownMenuContent className="w-56 text-[10px] font-normal text-black dark:text-neutral-400 space-y-[2px] bg-zinc-950/80">
                 {isModerator && (
                     <DropdownMenuItem
                         onClick={() => onOpen('invite', { server })}
