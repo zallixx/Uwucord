@@ -10,7 +10,7 @@ function NavigationPrivateMessages() {
     const router = useRouter();
 
     const onClick = () => {
-        router.push(`/chats/main}`);
+        router.push(`/chats/main`);
     };
 
     return (

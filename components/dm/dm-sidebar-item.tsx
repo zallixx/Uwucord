@@ -2,15 +2,17 @@
 
 import { X } from 'lucide-react';
 import { useState } from 'react';
+import navigate from '@/components/dm/dm-item-redirect';
 
 interface ChatSidebarItemProps {
     params: {
         imgLink: string | undefined;
         chatName: string | undefined;
+        id: string;
     };
 }
 
-function ChatSidebarItem({ params }: Readonly<ChatSidebarItemProps>) {
+function DmSidebarItem({ params }: Readonly<ChatSidebarItemProps>) {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
@@ -18,6 +20,7 @@ function ChatSidebarItem({ params }: Readonly<ChatSidebarItemProps>) {
             className="mx-2 h-[42px] w-[224px] text-[#949ba4] rounded-md bg-transparent text-sm relative hover:bg-[#36373d] hover:text-[#dbdee1]"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            onClick={() => navigate(params.id)}
         >
             <div className="my-1 flex flex-row items-center">
                 <img
@@ -35,4 +38,4 @@ function ChatSidebarItem({ params }: Readonly<ChatSidebarItemProps>) {
     );
 }
 
-export default ChatSidebarItem;
+export default DmSidebarItem;

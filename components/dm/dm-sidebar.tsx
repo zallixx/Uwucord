@@ -6,7 +6,7 @@ import { Separator } from '@/components/ui/separator';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import ActionTooltip from '@/components/action-tooltip';
 
-import ChatSidebarItem from '@/components/chat/chat-sidebar-item';
+import DmSidebarItem from '@/components/dm/dm-sidebar-item';
 
 interface Chat {
     id: string;
@@ -36,7 +36,7 @@ interface Chat {
     };
 }
 
-async function ChatSidebar() {
+async function DmSidebar() {
     const profile = await currentProfile();
 
     async function findChatsByUser() {
@@ -67,6 +67,7 @@ async function ChatSidebar() {
     function getChatInfo(chat: Chat) {
         let imgLink;
         let chatName;
+        let id = chat.id;
 
         if (chat.profileOne.profile.userId !== profile?.userId) {
             imgLink = chat.profileOne.profile.imageUrl;
@@ -75,7 +76,7 @@ async function ChatSidebar() {
             imgLink = chat.profileTwo.profile.imageUrl;
             chatName = chat.profileTwo.profile.name;
         }
-        return { imgLink, chatName };
+        return { imgLink, chatName, id };
     }
 
     const chats = await findChatsByUser();
@@ -106,11 +107,11 @@ async function ChatSidebar() {
                 </p>
                 <Separator />
                 {chats.map((chat) => {
-                    const { imgLink, chatName } = getChatInfo(chat);
+                    const { imgLink, chatName, id } = getChatInfo(chat);
                     return (
-                        <ChatSidebarItem
+                        <DmSidebarItem
                             key={chat.id}
-                            params={{ imgLink, chatName }}
+                            params={{ imgLink, chatName, id }}
                         />
                     );
                 })}
@@ -119,4 +120,4 @@ async function ChatSidebar() {
     );
 }
 
-export default ChatSidebar;
+export default DmSidebar;
