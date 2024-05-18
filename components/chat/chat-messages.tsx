@@ -131,7 +131,7 @@ function ChatMessages({
                                     <ChatItem
                                         key={message.id}
                                         id={message.id}
-                                        currentMember={member}
+                                        currentMember={member!}
                                         member={message.member}
                                         content={message.content}
                                         fileUrl={message.fileUrl}
@@ -162,7 +162,7 @@ function ChatMessages({
                                     <ChatItemDm
                                         key={message.id}
                                         id={message.id}
-                                        currentProfile={profile}
+                                        currentProfile={profile!}
                                         profile={message.profile}
                                         content={message.content}
                                         fileUrl={message.fileUrl}

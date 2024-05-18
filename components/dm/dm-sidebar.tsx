@@ -8,30 +8,12 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import ActionTooltip from '@/components/action-tooltip';
 
 import DmSidebarItem from '@/components/dm/dm-sidebar-item';
+import { Conversation, Profile } from '@prisma/client';
 
-interface Conversation {
-    id: string;
-    profileOneId: string;
-    profileTwoId: string;
-    profileOne: {
-        id: string;
-        userId: string;
-        name: string;
-        imageUrl: string;
-        email: string;
-        createdAt: Date;
-        updatedAt: Date;
-    };
-    profileTwo: {
-        id: string;
-        userId: string;
-        name: string;
-        imageUrl: string;
-        email: string;
-        createdAt: Date;
-        updatedAt: Date;
-    };
-}
+type ConversationWithProfiles = Conversation & {
+    profileOne: Profile,
+    profileTwo: Profile,
+};
 
 async function DmSidebar() {
     const profile = await currentProfile();
@@ -51,7 +33,7 @@ async function DmSidebar() {
         });
     }
 
-    function getConversationInfo(conversation: Conversation) {
+    function getConversationInfo(conversation: ConversationWithProfiles) {
         let imgLink;
         let conversationName;
         let id = conversation.id;
@@ -69,7 +51,7 @@ async function DmSidebar() {
     const conversations = await findConversationsByUser();
 
     return (
-        <div className="w-60">
+        <div className="flex flex-col h-full text-primary w-full dark:bg-[#2B2D31] bg-[#F2F3F5]">
             <ScrollArea>
                 <DmSearch />
                 <Separator className="border-neutral-200 dark:border-neutral-800 border-b-2" />

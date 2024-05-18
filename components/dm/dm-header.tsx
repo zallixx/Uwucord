@@ -5,10 +5,15 @@ import { db } from '@/lib/db';
 import { Profile } from '@prisma/client';
 import ChatHeader from '@/components/chat/chat-header';
 
-async function DmHeader() {
+interface ChatHeaderProps {
+    readonly type: string;
+    readonly conversationId?: string;
+    // eslint-disable-next-line react/require-default-props
+}
+
+async function DmHeader({ type, conversationId }: ChatHeaderProps) {
     const profile = await currentProfile();
-    const TypeOfArea = cookies().get('TypeOfArea')?.value;
-    const conversationId = cookies().get('conversationId')?.value;
+    const TypeOfArea = type;
 
     if (!profile) {
         return redirectToSignIn();
@@ -27,19 +32,20 @@ async function DmHeader() {
     let anotherProfile: Profile;
     if (conversation?.profileOne.id === profile.id) {
         anotherProfile = conversation!.profileTwo;
-    } else {
+    } else if (conversation?.profileTwo.id === profile.id) {
         anotherProfile = conversation!.profileOne;
     }
 
     return (
-        <div>
+        <>
             {TypeOfArea === 'conversation' && (
-                <ChatHeader serverId={''} name={anotherProfile.name} type={'conversation'} imageUrl={anotherProfile.imageUrl}/>
+                <ChatHeader serverId={''} name={anotherProfile!.name} type={'conversation'}
+                            imageUrl={anotherProfile!.imageUrl} />
             )}
             {TypeOfArea === 'friends' && (
                 <ChatHeader serverId={''} name={''} type={'friends'} />
             )}
-        </div>
+        </>
     );
 }
 
