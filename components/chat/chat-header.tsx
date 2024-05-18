@@ -1,4 +1,4 @@
-import {Hash, Users} from 'lucide-react';
+import { Hash, Users } from 'lucide-react';
 
 import MobileToggle from '@/components/mobile-toggle';
 import UserAvatar from '@/components/user-avatar';
@@ -14,7 +14,8 @@ interface ChatHeaderProps {
 
 function ChatHeader({ serverId, name, type, imageUrl }: ChatHeaderProps) {
     return (
-        <div className="text-md font-semibold px-3 flex items-center h-12 border-neutral-200 dark:border-neutral-800 border-b-2">
+        <div
+            className="text-md font-semibold px-3 flex items-center h-12 border-neutral-200 dark:border-neutral-800 border-b-2">
             <MobileToggle serverId={serverId} />
             {type === 'channel' && (
                 <Hash className="w-5 h-5 text-zinc-500 dark:text-zinc-400 mr-2" />
@@ -38,10 +39,16 @@ function ChatHeader({ serverId, name, type, imageUrl }: ChatHeaderProps) {
                     </p>
                 </div>
             )}
-            <div className="ml-auto flex items-center">
-                <SocketIndicator />
-            </div>
+
+            {type !== 'friends' && (
+                <div className="ml-auto flex items-center">
+                    <SocketIndicator />
+                </div>
+            )}
+
+
         </div>
+
     );
 }
 
