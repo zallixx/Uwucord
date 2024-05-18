@@ -6,16 +6,22 @@ import { headers } from 'next/headers';
 import ChatMessages from '@/components/chat/chat-messages';
 import ChatInput from '@/components/chat/chat-input';
 import { redirect } from 'next/navigation';
+import { Conversation, Member, Message, Profile } from '@prisma/client';
+
+type ConvoWithProfiles = Conversation & {
+    profileOne: Profile,
+    profileTwo: Profile,
+};
 
 async function findConversationById(ConversationId: string) {
     if (ConversationId != 'friends' && ConversationId != 'main') {
         const conversation = await db.conversation.findFirst({
             where: {
-                id: ConversationId,
+                id: ConversationId
             },
             include: {
                 profileOne: true,
-                profileTwo: true,
+                profileTwo: true
             }
         });
         if (conversation) {
@@ -29,27 +35,27 @@ async function findConversationById(ConversationId: string) {
 }
 
 async function DmMainArea() {
-    const url = headers().get('referer') || "";
-    const TypeOfArea = url.split("/")[4];
+    const url = headers().get('referer') || '';
+    const TypeOfArea = url.split('/')[4];
 
     const profile = await currentProfile();
-    const conversation = findConversationById(TypeOfArea);
+    const conversation: ConvoWithProfiles = await findConversationById(TypeOfArea);
     return (
         <div>
-            {/*
+
             <ChatMessages
-                profile={profile}
+                profile={profile!}
                 chatId={conversation.id}
                 type="conversation"
                 apiUrl="/api/directMessages"
                 socketUrl="/api/socket/directMessages"
                 socketQuery={{
-                    conversationId: conversation.id,
+                    conversationId: conversation.id
                 }}
                 paramKey="conversationId"
                 paramValue={conversation.id}
                 name={conversation.profileOne.name}
-             />
+            />
             <ChatInput
                 name={conversation.profileOne.name}
                 type="conversation"
@@ -58,7 +64,7 @@ async function DmMainArea() {
                     conversationId: conversation.id
                 }}
             />
-            */}
+
         </div>
     );
 }

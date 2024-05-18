@@ -48,9 +48,15 @@ function ChatMessages({
                           paramValue,
                           type
                       }: ChatMessagesProps) {
-    const queryKey = `chat:${chatId}`;
-    const addKey = `chat:${chatId}:messages`;
-    const updateKey = `chat:${chatId}:messages:update`;
+    let queryKey = `chat:${chatId}`;
+    let addKey = `chat:${chatId}:messages`;
+    let updateKey = `chat:${chatId}:messages:update`;
+    if (type === 'conversation') {
+        queryKey = `conversation:${chatId}`;
+        addKey = `conversation:${chatId}:directMessages`;
+        updateKey = `conversation:${chatId}:directMessages:update`;
+    }
+
 
     const chatRef = useRef<ElementRef<'div'>>(null);
     const bottomRef = useRef<ElementRef<'div'>>(null);
