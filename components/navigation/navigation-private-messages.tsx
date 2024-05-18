@@ -12,7 +12,7 @@ function NavigationPrivateMessages() {
     const onClick = () => {
         router.push(`/chats/main`);
     };
-
+    console.log(params);
     return (
         <div>
             <ActionTooltip side="right" align="center" label="Личные сообщения">
@@ -26,16 +26,16 @@ function NavigationPrivateMessages() {
                         className={cn(
                             'absolute left-0 bg-primary rounded-r-full transition-all w-[0px]',
                             !params?.chatsId &&
-                                params?.chatsId !== '0' &&
-                                'group-hover:h-[20px] group-hover:w-[4px]',
+                            'group-hover:h-[20px] group-hover:w-[4px]',
                             params?.chatsId && params?.chatsId !== '0'
                                 ? 'h-[36px] w-[4px]'
-                                : 'h-[8px] group-hover:w-[4px]',
+                                : 'h-[8px] group-hover:w-[4px]'
                         )}
                     />
                     <div
-                        className="flex mx-3 h-[48px] w-[48px] rounded-[24px] group-hover:rounded-[16px] transition-all
-                    overflow-hidden items-center justify-center bg-background dark:bg-neutral-700 group-hover:bg-[#5865f2]"
+                        className={cn('flex mx-3 h-[48px] w-[48px] rounded-[24px] group-hover:rounded-[16px] transition-all overflow-hidden items-center justify-center group-hover:bg-[#5865f2]',
+                            params?.chatsId && params?.chatsId !== '0' && "bg-[#5865f2] rounded-[16px]",
+                            !params?.chatsId && "bg-background dark:bg-neutral-700")}
                     >
                         <MessageCircle
                             size={25}
