@@ -51,38 +51,34 @@ function EditChannelModal() {
 
     const isModalOpen = isOpen && type === 'editChannel';
     // @ts-ignore
-    const { channel } = data;
-
-    const [initialValues, setInitialValues] = useState({
-        name: '',
-        type: ChannelType.TEXT,
-    });
-
-    useEffect(() => {
-        if (channel) {
-            setInitialValues({
-                name: channel.name,
-                type: channel.type,
-            });
-        }
-    }, [channel, setInitialValues]);
+    const { channel, server } = data;
 
     const form = useForm({
         resolver: zodResolver(formSchema),
-        defaultValues: initialValues,
+        defaultValues: {
+            name: "",
+            type: channel?.type || ChannelType.TEXT,
+        }
     });
+    useEffect(() => {
+        if (channel) {
+            form.setValue("name", channel.name);
+            form.setValue("type", channel.type);
+        }
+    }, [form, channel]);
+
 
     const isLoading = form.formState.isSubmitting;
 
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
             const url = qs.stringifyUrl({
-                url: `/api/channels/${channel.id}`,
+                url: `/api/channels/${channel?.id}`,
                 query: {
-                    serverId: params?.serverId,
-                },
+                    serverId: server?.id
+                }
             });
-            await axios.put(url, values);
+            await axios.patch(url, values);
 
             form.reset();
             router.refresh();
@@ -90,7 +86,7 @@ function EditChannelModal() {
         } catch (error) {
             console.log(error);
         }
-    };
+    }
 
     const handleClose = () => {
         form.reset();
