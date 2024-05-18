@@ -8,76 +8,64 @@ import ActionTooltip from '@/components/action-tooltip';
 
 import DmSidebarItem from '@/components/dm/dm-sidebar-item';
 
-interface Chat {
+interface Conversation {
     id: string;
     profileOneId: string;
     profileTwoId: string;
     profileOne: {
-        profile: {
-            id: string;
-            userId: string;
-            name: string;
-            imageUrl: string;
-            email: string;
-            createdAt: Date;
-            updatedAt: Date;
-        };
+        id: string;
+        userId: string;
+        name: string;
+        imageUrl: string;
+        email: string;
+        createdAt: Date;
+        updatedAt: Date;
     };
     profileTwo: {
-        profile: {
-            id: string;
-            userId: string;
-            name: string;
-            imageUrl: string;
-            email: string;
-            createdAt: Date;
-            updatedAt: Date;
-        };
+        id: string;
+        userId: string;
+        name: string;
+        imageUrl: string;
+        email: string;
+        createdAt: Date;
+        updatedAt: Date;
     };
 }
 
 async function DmSidebar() {
     const profile = await currentProfile();
 
-    async function findChatsByUser() {
+    async function findConversationsByUser() {
         return db.conversation.findMany({
             where: {
                 OR: [
-                    { profileOne: { profileId: profile?.id } },
-                    { profileTwo: { profileId: profile?.id } },
+                    { profileOneId: profile?.id },
+                    { profileTwoId: profile?.id },
                 ],
             },
             include: {
-                profileOne: {
-                    select: {
-                        profile: true,
-                    },
-                },
-                profileTwo: {
-                    select: {
-                        profile: true,
-                    },
-                },
+                profileOne: true,
+                profileTwo: true,
             },
         });
     }
 
-    function getChatInfo(chat: Chat) {
+    function getConversationInfo(conversation: Conversation) {
         let imgLink;
-        let chatName;
-        let id = chat.id;
+        let conversationName;
+        let id = conversation.id;
 
-        if (chat.profileOne.profile.userId !== profile?.userId) {
-            imgLink = chat.profileOne.profile.imageUrl;
-            chatName = chat.profileOne.profile.name;
-        } else if (chat.profileTwo.profile.userId !== profile?.userId) {
-            imgLink = chat.profileTwo.profile.imageUrl;
-            chatName = chat.profileTwo.profile.name;
+        if (conversation.profileOne.userId !== profile?.userId) {
+            imgLink = conversation.profileOne.imageUrl;
+            conversationName = conversation.profileOne.name;
+        } else if (conversation.profileTwo.userId !== profile?.userId) {
+            imgLink = conversation.profileTwo.imageUrl;
+            conversationName = conversation.profileTwo.name;
         }
-        return { imgLink, chatName, id };
+        return { imgLink, conversationName, id };
     }
 
-    const chats = await findChatsByUser();
+    const conversations = await findConversationsByUser();
 
     return (
         <div className="w-60 bg-[#2b2d31]">
@@ -104,12 +92,13 @@ async function DmSidebar() {
                     </ActionTooltip>
                 </p>
                 <Separator />
-                {chats.map((chat) => {
-                    const { imgLink, chatName, id } = getChatInfo(chat);
+                {conversations.map((conversation) => {
+                    // @ts-ignore
+                    const { imgLink, conversationName, id } = getConversationInfo(conversation);
                     return (
                         <DmSidebarItem
-                            key={chat.id}
-                            params={{ imgLink, chatName, id }}
+                            key={conversation.id}
+                            params={{ imgLink, conversationName, id }}
                         />
                     );
                 })}

@@ -2,11 +2,11 @@
 
 import { redirect } from 'next/navigation';
 
-async function navigate(ChatId: string) {
-    if (ChatId === '') {
+async function navigate(ConversationId: string) {
+    if (ConversationId === '') {
         return
     }
-    return redirect(`/chats/${ChatId}`);
+    return redirect(`/chats/${ConversationId}`);
 }
 
 export default navigate;

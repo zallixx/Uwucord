@@ -7,47 +7,58 @@ import ChatMessages from '@/components/chat/chat-messages';
 import ChatInput from '@/components/chat/chat-input';
 import { redirect } from 'next/navigation';
 
-async function findChatById() {
-    const url = headers().get('referer') || "";
-    const ConversationId = url.split("/")[4];
-
+async function findConversationById(ConversationId: string) {
     if (ConversationId != 'friends' && ConversationId != 'main') {
-        const chat = await db.conversation.findFirst({
+        const conversation = await db.conversation.findFirst({
             where: {
                 id: ConversationId,
             },
             include: {
-                profileOne: {
-                    select: {
-                        profile: true
-                    }},
-                profileTwo: {
-                    select: {
-                        profile: true
-                    }},
+                profileOne: true,
+                profileTwo: true,
             }
         });
-        if (chat) {
-            return chat;
-        }
-        else {
-            return redirect('/')
+        if (conversation) {
+            return conversation;
+        } else {
+            return redirect('/chats/main');
         }
     } else {
-        return;
+        return undefined;
     }
 }
 
 async function DmMainArea() {
+    const url = headers().get('referer') || "";
+    const TypeOfArea = url.split("/")[4];
+
     const profile = await currentProfile();
-    const chat = findChatById();
-/*
-<ChatMessages name={} member={} chatId={} apiUrl={} socketUrl={} socketQuery={{}} paramKey={} paramValue={} type={} />
-<ChatInput apiUrl={} query={} name={} type={} />
-*/
+    const conversation = findConversationById(TypeOfArea);
     return (
         <div>
-
+            {/*
+            <ChatMessages
+                profile={profile}
+                chatId={conversation.id}
+                type="conversation"
+                apiUrl="/api/directMessages"
+                socketUrl="/api/socket/directMessages"
+                socketQuery={{
+                    conversationId: conversation.id,
+                }}
+                paramKey="conversationId"
+                paramValue={conversation.id}
+                name={conversation.profileOne.name}
+             />
+            <ChatInput
+                name={conversation.profileOne.name}
+                type="conversation"
+                apiUrl="/api/socket/directMessages"
+                query={{
+                    conversationId: conversation.id
+                }}
+            />
+            */}
         </div>
     );
 }

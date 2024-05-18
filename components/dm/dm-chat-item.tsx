@@ -19,7 +19,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useModal } from '@/hooks/use-modal-store';
 
-interface ChatItemDmProps {
+interface ConversationIdItemDmProps {
     readonly id: string;
     readonly content: string;
     readonly profile: Profile
@@ -47,7 +47,7 @@ function ChatItemDm({
                       isUpdated,
                       socketUrl,
                       socketQuery,
-                  }: ChatItemDmProps) {
+                  }: ConversationIdItemDmProps) {
     const [isEditing, setIsEditing] = useState(false);
     const { onOpen } = useModal();
     const params = useParams();

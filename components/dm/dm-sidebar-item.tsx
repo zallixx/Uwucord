@@ -4,20 +4,20 @@ import { X } from 'lucide-react';
 import { useState } from 'react';
 import navigate from '@/components/dm/dm-item-redirect';
 
-interface ChatSidebarItemProps {
+interface ConversationSidebarItemProps {
     params: {
         imgLink: string | undefined;
-        chatName: string | undefined;
+        conversationName: string | undefined;
         id: string;
     };
 }
 
-function DmSidebarItem({ params }: Readonly<ChatSidebarItemProps>) {
+function DmSidebarItem({ params }: Readonly<ConversationSidebarItemProps>) {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
         <div
-            className="mx-2 h-[42px] w-[224px] text-[#949ba4] rounded-md bg-transparent text-sm relative hover:bg-[#36373d] hover:text-[#dbdee1]"
+            className="mx-2 h-[42px] w-[224px] text-[#949ba4] rounded-md bg-transparent text-sm relative hover:bg-[#36373d] hover:text-[#dbdee1] cursor-pointer"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             onClick={() => navigate(params.id)}
@@ -25,10 +25,10 @@ function DmSidebarItem({ params }: Readonly<ChatSidebarItemProps>) {
             <div className="my-1 flex flex-row items-center">
                 <img
                     src={params.imgLink}
-                    className="w-[32px] h-[32px] rounded-full mr-4 my-1 mx-1"
-                    alt={params.chatName}
+                    className="w-[32px] h-[32px] rounded-full mr-2 my-1 mx-2"
+                    alt={params.conversationName}
                 />
-                <p className="text-sm text-[#dbdee1]">{params.chatName}</p>
+                <p className="text-sm text-[#dbdee1]">{params.conversationName}</p>
                 <X
                     size={18}
                     className={`ml-auto mr-3 ${isHovered ? 'opacity-90' : 'opacity-0'}`}
