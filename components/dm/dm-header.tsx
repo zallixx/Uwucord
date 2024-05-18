@@ -1,6 +1,5 @@
 import currentProfile from '@/lib/current-profile';
 import { redirectToSignIn } from '@clerk/nextjs';
-import { cookies } from 'next/headers';
 import { db } from '@/lib/db';
 import { Profile } from '@prisma/client';
 import ChatHeader from '@/components/chat/chat-header';

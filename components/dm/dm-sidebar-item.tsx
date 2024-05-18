@@ -2,7 +2,8 @@
 
 import { X } from 'lucide-react';
 import { useState } from 'react';
-import navigate from '@/components/dm/dm-item-redirect';
+import { useRouter } from 'next/navigation';
+
 
 interface ConversationSidebarItemProps {
     params: {
@@ -14,13 +15,13 @@ interface ConversationSidebarItemProps {
 
 function DmSidebarItem({ params }: Readonly<ConversationSidebarItemProps>) {
     const [isHovered, setIsHovered] = useState(false);
-
+    const router = useRouter();
     return (
         <div
             className="mx-2 h-[42px] w-[224px] text-[#949ba4] rounded-md bg-transparent text-sm relative hover:bg-[#dfe1e5] hover:text-[#313338] dark:hover:bg-[#36373d] dark:hover:text-[#dbdee1] cursor-pointer"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            onClick={() => navigate({ BtnClicked: 'conversation', ConversationId: params.id } )}
+            onClick={() => router.push(`/chats/${params.id}`)}
         >
             <div className="my-1 flex flex-row items-center">
                 <img
