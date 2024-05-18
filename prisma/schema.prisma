@@ -20,11 +20,11 @@ model Profile {
   channels       Channel[]
   directMessages DirectMessage[]
 
-  friendOf1 Friendship[] @relation("User1")
-  friendOf2 Friendship[] @relation("User2")
+  friendshipInitiated Friendship[] @relation("ProfileOne")
+  friendshipReceived Friendship[] @relation("ProfileTwo")
 
-  receivedFriendshipRequests FriendshipRequest[] @relation("FriendshipRequestsReceived")
-  sentFriendshipRequests     FriendshipRequest[] @relation("FriendshipRequestsSent")
+  receivedFriendshipRequests FriendshipRequest[] @relation("ProfileOne")
+  sentFriendshipRequests     FriendshipRequest[] @relation("ProfileTwo")
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -159,28 +159,32 @@ model DirectMessage {
 
 model FriendshipRequest {
   id     String  @id @default(uuid())
-  sender Profile @relation("FriendshipRequestsSent", fields: [senderId], references: [id])
-
-  senderId String
-
-  recipient   Profile @relation("FriendshipRequestsReceived", fields: [recipientId], references: [id])
-  recipientId String
-
-  status String // "pending", "accepted", "rejected"
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+
+  profileOneId String
+  profileOne   Profile @relation("ProfileOne", fields: [profileOneId], references: [id], onDelete: Cascade)
+
+  profileTwoId String
+  profileTwo   Profile @relation("ProfileTwo", fields: [profileTwoId], references: [id], onDelete: Cascade)
+
+  status String // "pending"
+
+  @@unique([profileOneId, profileTwoId])
+  @@index([profileTwoId])
 }
 
 model Friendship {
   id String @id @default(uuid())
 
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 
-  user1   Profile @relation("User1", fields: [userId1], references: [id])
-  userId1 String
+  profileOneId String
+  profileOne   Profile @relation("ProfileOne", fields: [profileOneId], references: [id], onDelete: Cascade)
 
-  user2   Profile @relation("User2", fields: [userId2], references: [id])
-  userId2 String
+  profileTwoId String
+  profileTwo   Profile @relation("ProfileTwo", fields: [profileTwoId], references: [id], onDelete: Cascade)
+
+  @@unique([profileOneId, profileTwoId])
+  @@index([profileTwoId])
 }

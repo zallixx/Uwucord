@@ -6,6 +6,7 @@ import { redirect } from 'next/navigation';
 import ChatMessages from '@/components/chat/chat-messages';
 import ChatInput from '@/components/chat/chat-input';
 import { Profile } from '@prisma/client';
+import DmFriendsArea from '@/components/dm/dm-friends-area';
 
 interface ChatsIdPageProps {
     params: {
@@ -16,6 +17,7 @@ interface ChatsIdPageProps {
 async function ChatsIdPage({ params }: Readonly<ChatsIdPageProps>) {
     const profile = await currentProfile();
     let type = 'conversation';
+    let activeBtn = 'all';
 
     if (!profile) {
         return redirectToSignIn();
@@ -30,8 +32,9 @@ async function ChatsIdPage({ params }: Readonly<ChatsIdPageProps>) {
         }
     });
     console.log(params.chatsId)
-    if (params.chatsId === 'main') {
+    if (params.chatsId === 'main' || params.chatsId === 'pending' || params.chatsId === 'add') {
         type = 'friends';
+        activeBtn = params.chatsId
     } else {
         if (!conversation) {
             redirect('/');
@@ -49,6 +52,7 @@ async function ChatsIdPage({ params }: Readonly<ChatsIdPageProps>) {
             <DmHeader
                 conversationId={params.chatsId}
                 type={type}
+                activeBtn={activeBtn}
             />
             {type === 'conversation' && (
                 <>
@@ -74,6 +78,9 @@ async function ChatsIdPage({ params }: Readonly<ChatsIdPageProps>) {
                         }}
                     />
                 </>
+            )}
+            {type === 'friends' && (
+                <DmFriendsArea activeBtn={activeBtn}/>
             )}
         </div>
     );

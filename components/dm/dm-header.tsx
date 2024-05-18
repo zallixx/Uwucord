@@ -7,10 +7,11 @@ import ChatHeader from '@/components/chat/chat-header';
 interface ChatHeaderProps {
     readonly type: string;
     readonly conversationId?: string;
+    readonly activeBtn?: string;
     // eslint-disable-next-line react/require-default-props
 }
 
-async function DmHeader({ type, conversationId }: ChatHeaderProps) {
+async function DmHeader({ type, conversationId, activeBtn }: ChatHeaderProps) {
     const profile = await currentProfile();
     const TypeOfArea = type;
 
@@ -42,7 +43,7 @@ async function DmHeader({ type, conversationId }: ChatHeaderProps) {
                             imageUrl={anotherProfile!.imageUrl} />
             )}
             {TypeOfArea === 'friends' && (
-                <ChatHeader serverId={''} name={''} type={'friends'} />
+                <ChatHeader serverId={''} name={''} type={'friends'} activeBtn={activeBtn} />
             )}
         </>
     );
