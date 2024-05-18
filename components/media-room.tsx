@@ -1,10 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { LiveKitRoom, VideoConference } from "@livekit/components-react";
+import { LiveKitRoom, VideoConference } from '@livekit/components-react';
 import "@livekit/components-styles";
 import { useUser } from "@clerk/nextjs";
 import { Loader2 } from "lucide-react";
+import { useRouter } from 'next/navigation';
 
 interface MediaRoomProps {
     chatId: string;
@@ -19,6 +20,7 @@ export const MediaRoom = ({
                           }: MediaRoomProps) => {
     const { user } = useUser();
     const [token, setToken] = useState("");
+    let router = useRouter();
 
     useEffect(() => {
         if (!user?.firstName || !user?.lastName) return;
@@ -57,8 +59,9 @@ export const MediaRoom = ({
             connect={true}
             video={video}
             audio={audio}
+            onMouseLeave={()=>(router.back())}
         >
-            <VideoConference />
+            <VideoConference/>
         </LiveKitRoom>
     )
 }

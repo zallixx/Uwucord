@@ -77,7 +77,7 @@ async function ChannelIdPage({ params }: ChannelIdPageProps) {
             {channel.type === ChannelType.AUDIO && (
                 <MediaRoom
                     chatId={channel.id}
-                    video={false}
+                    video={true}
                     audio={true}
                 />
             )}
