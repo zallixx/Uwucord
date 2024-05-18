@@ -1,4 +1,4 @@
-import { PrismaClient } from '@prisma/client';
+import { db } from '@/lib/db';
 import { Plus, Users } from 'lucide-react';
 import currentProfile from '@/lib/current-profile';
 import DmSearch from '@/components/dm/dm-search';
@@ -40,9 +40,7 @@ async function DmSidebar() {
     const profile = await currentProfile();
 
     async function findChatsByUser() {
-        const prisma = new PrismaClient();
-
-        return prisma.conversation.findMany({
+        return db.conversation.findMany({
             where: {
                 OR: [
                     { profileOne: { profileId: profile?.id } },
