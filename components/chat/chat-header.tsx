@@ -40,24 +40,24 @@ function ChatHeader({ serverId, name, type, imageUrl, activeBtn }: ChatHeaderPro
             )}
             {type === 'friends' && (
                 <div className="my-2 font-bold text-sm">
-                    <div className="flex flex-row mx-1 dark:text-white select-none">
+                    <div className="flex flex-row mx-1 dark:text-white select-none text-[#060607]">
                         <Users color="#6d6f78" className="mx-2" strokeWidth={2} />
                         Друзья
-                        <Separator orientation="vertical" decorative className="ml-4 h-[24px] bg-[#3f4147]"/>
+                        <Separator orientation="vertical" decorative className="ml-4 h-[24px] dark:bg-[#3f4147] bg-[#e1e2e4]"/>
                         <Button
-                            className={`mx-1.5 h-[24px] dark:text-white dark:hover:bg-[#393c41] ${activeBtn === 'main' ? 'dark:bg-[#43444b] cursor-default' : 'bg-transparent text-gray-500'}`}
+                            className={`mx-1.5 h-[24px] dark:text-white dark:hover:bg-[#393c41] text-black hover:bg-[#eaebed] ${activeBtn === 'main' ? 'dark:bg-[#43444b] cursor-default bg-[#e1e2e4]' : 'bg-transparent'}`}
                             onClick={() => router.push('/chats/main')}
                         >
                             Все
                         </Button>
                         <Button
-                            className={`mx-1.5 h-[24px] dark:text-white dark:hover:bg-[#393c41] ${activeBtn === 'pending' ? 'dark:bg-[#43444b] cursor-default' : 'bg-transparent text-gray-500'}`}
+                            className={`mx-1.5 h-[24px] dark:text-white dark:hover:bg-[#393c41] text-black hover:bg-[#eaebed] ${activeBtn === 'pending' ? 'dark:bg-[#43444b] cursor-default bg-[#e1e2e4]' : 'bg-transparent'}`}
                             onClick={() => router.push('/chats/pending')}
                         >
                             Ожидание
                         </Button>
                         <Button
-                            className={`mx-1.5 h-[24px] dark:text-white dark:bg-[#248046] ${activeBtn === 'add' ? 'dark:bg-transparent dark:text-[#2dbb53] cursor-default' : ''}`}
+                            className={`mx-1.5 h-[24px] dark:text-white dark:bg-[#248046] bg-[#248046] hover:bg-[#258047] ${activeBtn === 'add' ? 'dark:bg-transparent dark:text-[#2dbb53] cursor-default bg-transparent text-[#248046] hover:bg-transparent' : ''}`}
                             onClick={() => router.push('/chats/add')}
                         >
                             Добавить в друзья

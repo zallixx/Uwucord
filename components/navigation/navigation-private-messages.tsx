@@ -33,7 +33,7 @@ function NavigationPrivateMessages() {
                     />
                     <div
                         className={cn('flex mx-3 h-[48px] w-[48px] rounded-[24px] group-hover:rounded-[16px] transition-all overflow-hidden items-center justify-center group-hover:bg-[#5865f2]',
-                            params?.chatsId && params?.chatsId !== '0' && "bg-[#5865f2] rounded-[16px]",
+                            params?.chatsId && params?.chatsId !== '0' && "bg-[#5865f2] text-white rounded-[16px]",
                             !params?.chatsId && "bg-background dark:bg-neutral-700")}
                     >
                         <MessageCircle
