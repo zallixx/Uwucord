@@ -82,12 +82,9 @@ async function DmFriendsArea({activeBtn}: DmFriendsAreaProps) {
                         } else if (friend?.profileTwo.id === profile.id) {
                             anotherProfile = friend!.profileOne;
                         }
-                        const conversation = await findConversationByUserId({anotherProfile, profile});
-                        if (conversation) {
-                            return (
-                                <DmFriendsItem key={anotherProfile.id} anotherProfile={anotherProfile} conversation={conversation}/>
-                            );
-                        }
+                        return (
+                            <DmFriendsItem key={anotherProfile.id} anotherProfile={anotherProfile} conversation={await findConversationByUserId({anotherProfile, profile})}/>
+                        );
                     })}
                 </div>
             )}
