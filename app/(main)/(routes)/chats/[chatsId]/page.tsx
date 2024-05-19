@@ -31,7 +31,6 @@ async function ChatsIdPage({ params }: Readonly<ChatsIdPageProps>) {
             profileTwo: true
         }
     });
-    console.log(params.chatsId)
     if (params.chatsId === 'main' || params.chatsId === 'pending' || params.chatsId === 'add') {
         type = 'friends';
         activeBtn = params.chatsId

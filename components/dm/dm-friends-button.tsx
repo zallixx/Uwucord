@@ -1,9 +1,9 @@
-'use client';
+'use client'
 
 import { Users } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 
-async function DmFriendsButton() {
+function DmFriendsButton() {
     const router = useRouter();
     return (
         <button

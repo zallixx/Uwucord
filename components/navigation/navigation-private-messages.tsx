@@ -12,7 +12,6 @@ function NavigationPrivateMessages() {
     const onClick = () => {
         router.push(`/chats/main`);
     };
-    console.log(params);
     return (
         <div>
             <ActionTooltip side="right" align="center" label="Личные сообщения">
