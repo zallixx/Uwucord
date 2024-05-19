@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button';
 import {Conversation, Profile} from '@prisma/client';
 import { useRouter } from 'next/navigation';
 import { MessageCircle } from 'lucide-react';
+import ActionTooltip from '@/components/action-tooltip';
+
 
 type Props = {
     anotherProfile: Profile;
@@ -25,12 +27,13 @@ function DmFriendsItem({anotherProfile, conversation}: Props) {
                     alt={anotherProfile.name}
                 />
                 <p className="text-sm">{anotherProfile.name}</p>
-                <div className="ml-auto">
+                <ActionTooltip label={"Сообщение"}>
                     <div
-                        className="text-white rounded-full w-9 h-9 flex items-center justify-center cursor-pointer dark:group-hover:bg-[#1e1f22] dark:bg-[#2b2d31] bg-[#f2f3f5]">
-                        <MessageCircle className="w-[19px] h-[19px] dark:fill-[#b5bac1] fill-[#4e5058] dark:text-[#b5bac1] text-[#4e5058]"/>
+                        className="ml-auto text-white rounded-full w-9 h-9 flex items-center justify-center cursor-pointer dark:group-hover:bg-[#1e1f22] dark:bg-[#2b2d31] bg-[#f2f3f5]">
+                        <MessageCircle
+                            className="w-[19px] h-[19px] dark:fill-[#b5bac1] fill-[#4e5058] dark:text-[#b5bac1] text-[#4e5058]"/>
                     </div>
-                </div>
+                </ActionTooltip>
             </Button>
         </>
     );
