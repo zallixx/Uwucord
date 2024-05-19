@@ -18,7 +18,7 @@ function DmSidebarItem({ params }: Readonly<ConversationSidebarItemProps>) {
     const router = useRouter();
     return (
         <div
-            className="mx-2 h-[42px] w-[224px] text-[#949ba4] rounded-md bg-transparent text-sm relative hover:bg-[#dfe1e5] hover:text-[#313338] dark:hover:bg-[#36373d] dark:hover:text-[#dbdee1] cursor-pointer"
+            className="mx-2 h-[42px] w-[224px] text-[#5c5e66] dark:text-[#949ba4] rounded-md bg-transparent text-sm relative hover:bg-[#dfe1e5] hover:text-[#313338] dark:hover:bg-[#36373d] dark:hover:text-[#dbdee1] cursor-pointer"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             onClick={() => router.push(`/chats/${params.id}`)}
