@@ -22,9 +22,9 @@ import {
 import { useModal } from '@/hooks/use-modal-store';
 
 interface ServerHeaderProps {
-    server: ServerWithMembersWithProfiles;
+    readonly server: ServerWithMembersWithProfiles;
     // eslint-disable-next-line react/require-default-props
-    role?: MemberRole;
+    readonly role?: MemberRole;
 }
 
 function ServerHeader({ server, role }: ServerHeaderProps) {

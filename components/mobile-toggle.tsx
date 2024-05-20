@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button';
 import NavigationSidebar from '@/components/navigation/navigation-sidebar';
 import ServerSidebar from '@/components/server/server-sidebar';
 
-function MobileToggle({ serverId }: { serverId: string }) {
+function MobileToggle({ serverId }: { readonly serverId: string }) {
     return (
         <Sheet>
             <SheetTrigger asChild>

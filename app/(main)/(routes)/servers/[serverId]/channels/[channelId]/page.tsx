@@ -16,7 +16,7 @@ interface ChannelIdPageProps {
     };
 }
 
-async function ChannelIdPage({ params }: ChannelIdPageProps) {
+async function ChannelIdPage({ params }: Readonly<ChannelIdPageProps>) {
     const profile = await currentProfile();
 
     if (!profile) {

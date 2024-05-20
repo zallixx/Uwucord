@@ -19,55 +19,39 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useModal } from '@/hooks/use-modal-store';
 
-interface ChatItemProps {
+interface ConversationIdItemDmProps {
     readonly id: string;
     readonly content: string;
-    readonly member: Member & {
-        readonly profile: Profile;
-    };
+    readonly profile: Profile
     readonly timestamp: string;
     readonly fileUrl: string | null;
     readonly deleted: boolean;
-    readonly currentMember: Member;
+    readonly currentProfile: Profile;
     readonly isUpdated: boolean;
     readonly socketUrl: string;
     readonly socketQuery: Record<string, string>;
 }
 
-const roleIconMap = {
-    GUEST: null,
-    MODERATOR: <ShieldCheck className="h-4 w-4 ml-2 text-indigo-500" />,
-    ADMIN: <ShieldAlert className="h-4 w-4 ml-2 text-rose-500" />,
-};
-
 const formSchema = z.object({
     content: z.string().min(1),
 });
 
-function ChatItem({
-    id,
-    content,
-    member,
-    timestamp,
-    fileUrl,
-    deleted,
-    currentMember,
-    isUpdated,
-    socketUrl,
-    socketQuery,
-}: ChatItemProps) {
+function ChatItemDm({
+                      id,
+                      content,
+                      profile,
+                      timestamp,
+                      fileUrl,
+                      deleted,
+                      currentProfile,
+                      isUpdated,
+                      socketUrl,
+                      socketQuery,
+                  }: ConversationIdItemDmProps) {
     const [isEditing, setIsEditing] = useState(false);
     const { onOpen } = useModal();
     const params = useParams();
     const router = useRouter();
-
-    const onMemberClick = () => {
-        if (member.id === currentMember.id) {
-            return;
-        }
-
-        router.push(`/servers/${params?.serverId}/conversations/${member.id}`);
-    };
 
     useEffect(() => {
         const handleKeyDown = (event: any) => {
@@ -114,10 +98,8 @@ function ChatItem({
 
     const fileType = fileUrl?.split('.').pop();
 
-    const isAdmin = currentMember.role === MemberRole.ADMIN;
-    const isModerator = currentMember.role === MemberRole.MODERATOR;
-    const isOwner = currentMember.id === member.id;
-    const canDeleteMessage = !deleted && (isAdmin || isModerator || isOwner);
+    const isOwner = currentProfile.id === profile.id;
+    const canDeleteMessage = !deleted && isOwner;
     const canEditMessage = !deleted && isOwner && !fileUrl;
     const isPDF = fileType === 'pdf' && fileUrl;
     const isImage = !isPDF && fileUrl;
@@ -127,24 +109,19 @@ function ChatItem({
             <div className="group flex gap-x-2 items-start w-full">
                 {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions */}
                 <div
-                    onClick={onMemberClick}
                     className="cursor-pointer hover:drop-shadow-md transition"
                 >
-                    <UserAvatar src={member.profile.imageUrl} />
+                    <UserAvatar src={profile.imageUrl} />
                 </div>
                 <div className="flex flex-col w-full">
                     <div className="flex items-center gap-x-2">
                         <div className="flex items-center">
                             {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-noninteractive-element-interactions */}
                             <p
-                                onClick={onMemberClick}
                                 className="font-semibold text-sm hover:underline cursor-pointer"
                             >
-                                {member.profile.name}
+                                {profile.name}
                             </p>
-                            <ActionTooltip label={member.role}>
-                                {roleIconMap[member.role]}
-                            </ActionTooltip>
                         </div>
                         <span className="text-xs text-zinc-500 dark:text-zinc-400">
                             {timestamp}
@@ -183,7 +160,7 @@ function ChatItem({
                             className={cn(
                                 'text-sm text-zinc-600 dark:text-zinc-300',
                                 deleted &&
-                                    'italic text-zinc-500 dark:text-zinc-400 text-xs mt-1',
+                                'italic text-zinc-500 dark:text-zinc-400 text-xs mt-1',
                             )}
                         >
                             {content}
@@ -261,4 +238,4 @@ function ChatItem({
     );
 }
 
-export default ChatItem;
+export default ChatItemDm;

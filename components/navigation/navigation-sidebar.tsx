@@ -1,5 +1,6 @@
 import { redirect } from 'next/navigation';
 import { UserButton } from '@clerk/nextjs';
+import { Server } from '@prisma/client';
 import currentProfile from '@/lib/current-profile';
 
 import { db } from '@/lib/db';
@@ -28,11 +29,11 @@ async function NavigationSidebar() {
     });
 
     return (
-        <div className="space-y-2 flex flex-col items-center h-full text-primary w-full dark:bg-[#1E1F22] py-3">
+        <div className="space-y-2 flex flex-col items-center h-full text-primary w-full dark:bg-[#1E1F22] py-3 bg-[#e3e5e8]">
             <NavigationPrivateMessages />
             <Separator className="h-[2px] bg-zinc-300 dark:bg-zinc-700 rounded-md w-8 mx-auto" />
             <ScrollArea className="flex-1 w-full">
-                {servers.map((server) => (
+                {servers.map((server: Server) => (
                     <div key={server.id} className="mb-2">
                         <NavigationItem
                             id={server.id}
