@@ -11,7 +11,7 @@ interface MediaRoomProps {
     chatId: string;
     video: boolean;
     audio: boolean;
-};
+}
 
 export const MediaRoom = ({
                               chatId,
@@ -20,7 +20,6 @@ export const MediaRoom = ({
                           }: MediaRoomProps) => {
     const { user } = useUser();
     const [token, setToken] = useState("");
-    let router = useRouter();
 
     useEffect(() => {
         if (!user?.firstName || !user?.lastName) return;
@@ -59,7 +58,6 @@ export const MediaRoom = ({
             connect={true}
             video={video}
             audio={audio}
-            onMouseLeave={()=>(router.back())}
         >
             <VideoConference/>
         </LiveKitRoom>
